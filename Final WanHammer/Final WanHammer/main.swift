@@ -39,6 +39,7 @@ func principalMenu() {
 }
 
 
+
 while stayInProgram == true {
     principalMenu()
 }
