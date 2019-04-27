@@ -13,7 +13,7 @@ import Foundation
 var stayInProgram = true
 var numberOfTeam = 0 // to switch team One and team Two
 var numberOfWizard = 0 // Because we can't have only Wizard in a team
-
+var numberOfFighter = 1 // to stop at 3 fighters
 
 
 // MARK: Array declaration
@@ -72,8 +72,7 @@ func userInput() {
             numberOfWizard = 0
         }
         // Choose the Fighters of each team
-        print("Ajouter fonction pour le choix des fighters")
-        // add function chooseFighter() later
+        chooseFighter()
         numberOfTeam += 1
     }
 }
@@ -121,6 +120,154 @@ func teamOfGamers() -> String {
     return teamofGamerOk
 }
 
+
+/**
+ chooseFighter : Menu to choose category of fighters : 1 2 3 4
+ */
+func chooseFighter() {
+    
+    
+    while numberOfFighter < 4 {
+        if numberOfFighter == 3 {
+            print("\r\rEt donc, quel sera ton dernier fighter ? ")
+        } else {
+            print("\r\rTu dois choisir \(4 - numberOfFighter) Fighters : ")
+        }
+        print("\n1. 🗡 Donne moi un combattant"
+            + "\n2. 👨‍🎤 Donne moi un nain"
+            + "\n3. 👹 Donne moi un colosse"
+            + "\n4. 🧙‍♀️ Donne moi un magicien"
+            + "\n5. 💻 Voir les caractéristiques des personnages")
+        
+        if let choiceMenu1 = readLine() {
+            switch choiceMenu1 {
+            case "1":
+                let fighterChoosen = "Combattant"
+                addFighter(category: fighterChoosen)
+            case "2":
+                let fighterChoosen = "Nain"
+                addFighter(category: fighterChoosen)
+            case "3":
+                let fighterChoosen = "Colosse"
+                addFighter(category: fighterChoosen)
+            case "4":
+                let fighterChoosen = "Magicien"
+                if numberOfWizard >= 2 {
+                    print("Désolé, vous ne pouvez pas choisir que des magiciens dans votre Team ;)")
+                    chooseFighter()
+                }
+                addFighter(category: fighterChoosen)
+            case "5":
+                print("Voici les caractéristiques des personnages :"
+                    + "\n 🗡 Le combattant : PV : 100, Dégâts : 10, Action : 1, spécial : Double Attaque"
+                    + "\n 👨‍🎤 Le nain : PV : 80, Arme : Hâche, Dégâts : 20, Action : 1, spécial : Double Dégâts"
+                    + "\n 👹 Le colosse : PV : 200, Dégâts : 5, Action : 1, spécial : Frayeur (Adversaire perd son tour)"
+                    + "\n 🧙‍♀️ Le magicien : PV : 150, Soins : +15, Action : 1, spécial : FireBall dégâts 30")
+                
+                print("Presser une touche pour continuer")
+                if let _ = readLine() {
+                    chooseFighter()
+                }
+            default:
+                print("Je n'ai pas compris ton choix")
+                chooseFighter()
+            }
+            
+        }
+        numberOfFighter += 1
+        // Add choice into an instance of Class Fighter
+        // depend of the gamer (numberOfTeam) and of the numberOfFighter
+        print ("\r\rTeam \(userArray[numberOfTeam].teamName) Voici ton tableau de combattants mis à jour :")
+        
+        if numberOfTeam == 0 {
+            for i in 0...fighterArrayP1.count - 1{
+                print("🔴Le \(fighterArrayP1[i].category) : \(fighterArrayP1[i].name)")
+            }
+        } else {
+            for i in 0...fighterArrayP2.count - 1 {
+                print("🔵Le \(fighterArrayP2[i].category) : \(fighterArrayP2[i].name)")
+            }
+        }
+    }
+    print("Tu as choisi \(numberOfFighter - 1) fighters")
+    numberOfFighter = 1
+}
+
+
+
+/**
+ addFighter : In this function : Adding fighter in the good user Array
+ */
+func addFighter(category: String) {
+    
+    print("\rOk pour le \(category) !")
+    let nameOfTheFighterOk = nameOfTheFighter()
+    let numberFetichOk = numberFetich()
+    var fighterInLoad = Fighter(name: "", numberFetich: 0)
+    switch category {
+    case "Combattant":
+        fighterInLoad = Warrior(name: nameOfTheFighterOk, numberFetich: numberFetichOk)
+    case "Nain":
+        fighterInLoad = Dwarf(name: nameOfTheFighterOk, numberFetich: numberFetichOk)
+    case "Colosse":
+        fighterInLoad = Colossus(name: nameOfTheFighterOk, numberFetich: numberFetichOk)
+    case "Magicien":
+        fighterInLoad = Wizard(name: nameOfTheFighterOk, numberFetich: numberFetichOk)
+        numberOfWizard += 1
+    default:
+        fighterInLoad = Fighter(name: "DEFAULT", numberFetich: 5)
+    }
+    if numberOfTeam == 0 {
+        fighterArrayP1.append(fighterInLoad)
+    } else if numberOfTeam == 1 {
+        fighterArrayP2.append(fighterInLoad)
+    }
+}
+
+
+
+/**
+ nameOfTheFighter : ask name of the fighter
+ */
+func nameOfTheFighter() -> String {
+    var nameOfTheFighterOk = ""
+    repeat {
+        print("Quel nom souhaite tu lui donner ? ")
+        if let nameTest = readLine(), nameTest != "" {
+            nameOfTheFighterOk = String(nameTest)
+            return nameOfTheFighterOk
+        } else {
+            print("Tu dois donner un nom à ton Fighter")
+        }
+    } while nameOfTheFighterOk == ""
+    return nameOfTheFighterOk
+}
+
+
+/**
+ numberFetich : ask FetichNumber of the fighter
+ */
+func numberFetich() -> Int {
+    let numberTestOk = ""
+    repeat {
+        print("Quel est ton numéro fétiche entre 1 et 9 ")
+        if let numberTest = readLine() {
+            if let numberTestOk = Int(numberTest) {
+                if numberTestOk > 0, numberTestOk < 10 {
+                    return numberTestOk
+                } else {
+                    print("Le chiffre doit être supérieur à 0, et inférieur à 10")
+                }
+            } else {
+                print("Cela ne peut être qu'un numéro !")
+            }
+            
+        } else {
+            print("Tu dois donner un numéro fétiche à ton Fighter dans la fonction numberTest ;)")
+        }
+    } while numberTestOk == ""
+    return 1
+}
 
 // LOOP FOR THE PROGRAM
 
