@@ -1,0 +1,50 @@
+# WanHammerOfficial
+Project 3 OPC iOS : Code without graphic : WanHammer
+
+# WanHammer
+First Game with XCODE Swift - Project 3 - OpenClassRoom's
+
+Welcome to the WanHammer Game :
+
+Games Rules : 
+
+
+First step : 
+Choose Your :
+- Team Name
+- User Name
+- 4 Fighters (Human, dwarf, magician, Colossus)
+- Favorite Number beetween 1 and 10
+
+
+Second Step : 
+The Battle !
+- You can check life point of each fighters
+- You can check the last action
+- Sometimes, you can choose a new weapon at the beginning of the round/or you can eat a bigMac/ or a Fruit
+- You have to choose which fighter do an action
+- You have to choose which opponent on the action will be done
+BONUS ZONE : 
+- If you're lucky, you can use your special attack
+- If you're lucky ++  you can use a critical attack 
+- If you're really bad, your CRITICAL ATTACK is missed, and your attack is not on the opponent but on one of your fighter
+
+
+If your fighter's life point fall to 0 : he's dead 
+
+Third Step : When 3 fighter's of one team are dead : 
+- Congrats announcement 
+- Showing the count of round
+
+
+
+SORRY FOR MY ENGLISH ;). I'm begginer 
+
+COLLABORATE : 
+- I'm student, so I have to practice and build this game alone
+- You can fork this project
+- Create a new branch "Develop" + "Nickname"
+- Be clear on your Commit
+- Give me a pull request 
+
+Enjoy ;) 
