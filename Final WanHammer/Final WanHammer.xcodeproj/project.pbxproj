@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		B30AF2482274B2320021FA0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF2472274B2320021FA0E /* main.swift */; };
+		B30AF24F2274B63F0021FA0E /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF24E2274B63F0021FA0E /* Fighter.swift */; };
+		B30AF2512274B6760021FA0E /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF2502274B6760021FA0E /* Warrior.swift */; };
+		B30AF2532274B68B0021FA0E /* Dwarf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF2522274B68B0021FA0E /* Dwarf.swift */; };
+		B30AF2552274B69C0021FA0E /* Colossus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF2542274B69C0021FA0E /* Colossus.swift */; };
+		B30AF2572274B6AC0021FA0E /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF2562274B6AC0021FA0E /* Wizard.swift */; };
+		B30AF2592274B6CB0021FA0E /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF2582274B6CB0021FA0E /* Weapon.swift */; };
+		B30AF25B2274B6DD0021FA0E /* Special.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF25A2274B6DD0021FA0E /* Special.swift */; };
+		B30AF25D2274B6F00021FA0E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF25C2274B6F00021FA0E /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +33,14 @@
 /* Begin PBXFileReference section */
 		B30AF2442274B2320021FA0E /* Final WanHammer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Final WanHammer"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30AF2472274B2320021FA0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B30AF24E2274B63F0021FA0E /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
+		B30AF2502274B6760021FA0E /* Warrior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warrior.swift; sourceTree = "<group>"; };
+		B30AF2522274B68B0021FA0E /* Dwarf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dwarf.swift; sourceTree = "<group>"; };
+		B30AF2542274B69C0021FA0E /* Colossus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colossus.swift; sourceTree = "<group>"; };
+		B30AF2562274B6AC0021FA0E /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
+		B30AF2582274B6CB0021FA0E /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
+		B30AF25A2274B6DD0021FA0E /* Special.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Special.swift; sourceTree = "<group>"; };
+		B30AF25C2274B6F00021FA0E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +73,25 @@
 		B30AF2462274B2320021FA0E /* Final WanHammer */ = {
 			isa = PBXGroup;
 			children = (
+				B30AF25E2274B70C0021FA0E /* Model */,
 				B30AF2472274B2320021FA0E /* main.swift */,
 			);
 			path = "Final WanHammer";
+			sourceTree = "<group>";
+		};
+		B30AF25E2274B70C0021FA0E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B30AF24E2274B63F0021FA0E /* Fighter.swift */,
+				B30AF2502274B6760021FA0E /* Warrior.swift */,
+				B30AF2522274B68B0021FA0E /* Dwarf.swift */,
+				B30AF2542274B69C0021FA0E /* Colossus.swift */,
+				B30AF2562274B6AC0021FA0E /* Wizard.swift */,
+				B30AF2582274B6CB0021FA0E /* Weapon.swift */,
+				B30AF25A2274B6DD0021FA0E /* Special.swift */,
+				B30AF25C2274B6F00021FA0E /* Category.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +151,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B30AF2552274B69C0021FA0E /* Colossus.swift in Sources */,
+				B30AF25B2274B6DD0021FA0E /* Special.swift in Sources */,
+				B30AF2512274B6760021FA0E /* Warrior.swift in Sources */,
 				B30AF2482274B2320021FA0E /* main.swift in Sources */,
+				B30AF2592274B6CB0021FA0E /* Weapon.swift in Sources */,
+				B30AF25D2274B6F00021FA0E /* Category.swift in Sources */,
+				B30AF2532274B68B0021FA0E /* Dwarf.swift in Sources */,
+				B30AF2572274B6AC0021FA0E /* Wizard.swift in Sources */,
+				B30AF24F2274B63F0021FA0E /* Fighter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

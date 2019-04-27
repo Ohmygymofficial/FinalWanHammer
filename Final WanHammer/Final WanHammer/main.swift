@@ -13,6 +13,7 @@ import Foundation
 var stayInProgram = true
 
 
+
 /**
  principalMenu : ask if User want to stay or quit program
  */
@@ -41,3 +42,5 @@ func principalMenu() {
 while stayInProgram == true {
     principalMenu()
 }
+
+
