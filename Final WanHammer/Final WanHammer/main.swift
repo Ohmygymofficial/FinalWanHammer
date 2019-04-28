@@ -37,7 +37,8 @@ func principalMenu() {
     print("Bienvenue dans le WANHAMMER")
     print("\rQue voulez vous faire ?"
         + "\n1. ▶ Entrer dans le WANHAMMER"
-        + "\n2. ❌ Je ne veux pas me battre")
+        + "\n2. ❌ Je ne veux pas me battre"
+        + "\n3. Attribution auto des équipes")
     
     if let choiceMenu1 = readLine() {
         switch choiceMenu1 {
@@ -48,6 +49,8 @@ func principalMenu() {
         case "2":
             print("Lâcheur ! 😜")
             stayInProgram = false
+        case "3":
+            demoMode()
         default: print("je n'ai pas compris")
         }
     }
@@ -320,19 +323,19 @@ func battleMode() {
                     // Sometimes, you take new weapon at the beginning of the round with a random chest
                     if let resultGift = randomChest(randomInt: randomInt, damageInLoad : damageInLoad) {
                         if resultGift != "" {
-                            print("Tu aperçois au sol \(resultGift), et tu t'en équipes !")
+                            print("C'est \(resultGift) ! Tu t'en équipes !")
                             if randomInt == 1 {
-                                print("Grâce à cela, ta puissance d'action est passée à : \(fighterArrayP1[attackerNumber].strenght) ")
+                                print("Ta puissance d'action est passée à : \(fighterArrayP1[attackerNumber].strenght) ")
                                 damageInLoad = fighterArrayP1[attackerNumber].strenght //update damageInLoad variable value
                             } else if randomInt == 2 {
-                                print("Grâce à cela, ta puissance d'action est passée à : \(fighterArrayP2[attackerNumber].strenght) ")
+                                print("Ta puissance d'action est passée à : \(fighterArrayP2[attackerNumber].strenght) ")
                                 damageInLoad = fighterArrayP2[attackerNumber].strenght  //update damageInLoad variable value
                             }
                             
                         }
                     }
                     
-                   
+                    
                     
                     //here we have the fetich number to add
                     
@@ -595,7 +598,7 @@ func randomChest(randomInt : Int, damageInLoad : Int) -> String? {
     let randomNumberChest = Int.random(in: 1..<5)
     if randomNumberChest == 2 {
         print("MICHEL MICHEL : Voir pour améliorer le code, il y a plein de doublon")
-        print("\r\rWaooow ! Quelle chance :")
+        print("\r\rWaooow ! Quelle chance !! Un coffre est apparu devant toi !")
         if checkCategory == false { // if it's not a wizard
             let resultGiftNumber = Int(arc4random_uniform(UInt32(weaponChestContent.count)))
             resultGift = weaponChestContent[resultGiftNumber]
@@ -746,13 +749,13 @@ func choiceDefender(randomInt: Int, damageInLoad: Int) {
  */
 func checkAllTeamLifePoint() {
     // You can check life point of each fighters
-    print("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
-    print("🔴Voici l'état actuel de chaque fighters de la team \(userArray[0].teamName)")
+    print("🔴🔴🔴🔴🔴🔴🔴🔴TEAM \(userArray[0].teamName)🔴🔴🔴🔴🔴🔴🔴🔴")
+    print("🔴Voici l'état actuel de tes fighters")
     for i in 0..<fighterArrayP1.count  {
         print("🔴Le \(fighterArrayP1[i].category) \(fighterArrayP1[i].name) possède \(fighterArrayP1[i].lifePoint) PV")
     }
     print("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
-    print("🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵")
+    print("\r🔵🔵🔵🔵🔵🔵🔵🔵TEAM \(userArray[1].teamName)🔵🔵🔵🔵🔵🔵🔵🔵")
     print("🔵Voici l'état actuel de chaque fighters de la team \(userArray[1].teamName)")
     for i in 0..<fighterArrayP1.count  {
         print("🔵Le \(fighterArrayP2[i].category) \(fighterArrayP2[i].name) possède \(fighterArrayP2[i].lifePoint) PV")
@@ -768,14 +771,86 @@ func checkAllTeamLifePoint() {
 func  actionPrint(lifePointP1: Int, lifePointP2: Int) {
     
     print("\r\t\t\t\t\t\t\t\t\t\t\tVoici la dernière action réalisée :"
-        + "\r\t\t\t\t\t\t\t\t\t\t\tLa team \(actionArray[0]) avec \(actionArray[1]) le \(actionArray[2])"
-        + "\r\t\t\t\t\t\t\t\t\t\t\ta fait son action sur \(actionArray[5]) le \(actionArray[6]) de la team \(actionArray[4])."
+        + "\r\t\t\t\t\t\t\t\t\t\t\t\(actionArray[1]) le \(actionArray[2]) a fait son action sur \(actionArray[5]) le \(actionArray[6])"
         + "\r\t\t\t\t\t\t\t\t\t\t\tIl possède maintenant \(actionArray[7]) point de vies")
     print("\r\t\t\t\t\t\t\t\t\t\t\t🔴Score actuel de la team \(userArray[0].teamName) du joueur \(userArray[0].gamerName) : \(lifePointP1)")
-    print("\r\t\t\t\t\t\t\t\t\t\t\t🔵Score actuel de la team \(userArray[1].teamName) du joueur \(userArray[1].gamerName) : \(lifePointP2)")
+    print("\t\t\t\t\t\t\t\t\t\t\t🔵Score actuel de la team \(userArray[1].teamName) du joueur \(userArray[1].gamerName) : \(lifePointP2)")
     
 }
 
+
+
+
+
+func demoMode() {
+    
+    //Create FAKE USER and TEAM
+    var teamDemo = Team(gamerName: "Jean", teamName: "JeanBute")
+    userArray.append(teamDemo)
+    teamDemo = Team(gamerName: "Luc", teamName: "LuckYTeam")
+    userArray.append(teamDemo)
+    
+    //CREATE FIGHTERS
+    for i in 1...6 {
+        
+        if i == 1 {
+            let fighterInLoad = Fighter(name: ("JeanFighter \(i)"), numberFetich: i)
+            fighterInLoad.category = Category.dwarf.rawValue
+            fighterInLoad.weapon = "Hâche"
+            fighterInLoad.special = "Double Dégâts"
+            fighterInLoad.lifePoint = 80
+            fighterInLoad.strenght = 20
+            fighterArrayP1.append(fighterInLoad)
+        }
+        
+        if i == 2 {
+            let fighterInLoad = Fighter(name: ("JeanFighter \(i)"), numberFetich: i)
+            fighterInLoad.category = Category.colossus.rawValue
+            fighterInLoad.weapon = "Poing"
+            fighterInLoad.special = "Frayeur"
+            fighterInLoad.lifePoint = 200
+            fighterInLoad.strenght = 5
+            fighterArrayP1.append(fighterInLoad)
+        }
+        
+        if i == 3 {
+            let fighterInLoad = Fighter(name: ("JeanFighter \(i)"), numberFetich: i)
+            fighterInLoad.category = Category.warrior.rawValue
+            fighterArrayP1.append(fighterInLoad)
+        }
+        if i == 4 {
+            let fighterInLoad = Fighter(name: ("LucFighter \(i - 3)"), numberFetich: i)
+            fighterInLoad.category = Category.dwarf.rawValue
+            fighterInLoad.weapon = "Hâche"
+            fighterInLoad.special = "Double Dégâts"
+            fighterInLoad.lifePoint = 80
+            fighterInLoad.strenght = 20
+            fighterArrayP2.append(fighterInLoad)
+        }
+        
+        if i == 5 {
+            let fighterInLoad = Fighter(name: ("LucFighter \(i - 3)"), numberFetich: i)
+            fighterInLoad.category = Category.colossus.rawValue
+            fighterInLoad.weapon = "Poing"
+            fighterInLoad.special = "Frayeur"
+            fighterInLoad.lifePoint = 200
+            fighterInLoad.strenght = 5
+            fighterArrayP2.append(fighterInLoad)
+        }
+        
+        if i == 6 {
+            let fighterInLoad = Fighter(name: ("LucFighter \(i - 3)"), numberFetich: i)
+            fighterInLoad.category = Category.wizard.rawValue
+            fighterInLoad.weapon = "Baguette"
+            fighterInLoad.special = "FireBall"
+            fighterInLoad.lifePoint = 125
+            fighterInLoad.strenght = 20
+            fighterArrayP2.append(fighterInLoad)
+        }
+    }
+    battleMode()
+    
+}
 
 
 // LOOP FOR THE PROGRAM
