@@ -17,6 +17,7 @@
 		B30AF25B2274B6DD0021FA0E /* Special.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF25A2274B6DD0021FA0E /* Special.swift */; };
 		B30AF25D2274B6F00021FA0E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF25C2274B6F00021FA0E /* Category.swift */; };
 		B321322B2274BC0A00321B77 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = B321322A2274BC0A00321B77 /* Team.swift */; };
+		B321322D2275EB1600321B77 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = B321322C2275EB1600321B77 /* History.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,7 @@
 		B30AF25A2274B6DD0021FA0E /* Special.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Special.swift; sourceTree = "<group>"; };
 		B30AF25C2274B6F00021FA0E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B321322A2274BC0A00321B77 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		B321322C2275EB1600321B77 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		B30AF25E2274B70C0021FA0E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B321322C2275EB1600321B77 /* History.swift */,
 				B321322A2274BC0A00321B77 /* Team.swift */,
 				B30AF24E2274B63F0021FA0E /* Fighter.swift */,
 				B30AF2502274B6760021FA0E /* Warrior.swift */,
@@ -157,6 +160,7 @@
 				B30AF2552274B69C0021FA0E /* Colossus.swift in Sources */,
 				B30AF25B2274B6DD0021FA0E /* Special.swift in Sources */,
 				B30AF2512274B6760021FA0E /* Warrior.swift in Sources */,
+				B321322D2275EB1600321B77 /* History.swift in Sources */,
 				B30AF2482274B2320021FA0E /* main.swift in Sources */,
 				B30AF2592274B6CB0021FA0E /* Weapon.swift in Sources */,
 				B30AF25D2274B6F00021FA0E /* Category.swift in Sources */,
