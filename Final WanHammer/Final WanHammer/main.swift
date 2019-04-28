@@ -334,6 +334,34 @@ func battleMode() {
                     
                    
                     
+                    //here we have the fetich number to add
+                    
+                    if let resultFetich = randomFetichNumber(randomInt: randomInt) {
+                        var category = ""
+                        if resultFetich == true { // if the fetichNumber was selected
+                            if randomInt == 1 { // for the team One, take the category
+                                category = fighterArrayP1[attackerNumber].category
+                            } else if randomInt == 2 { // for the team 2
+                                category = fighterArrayP2[attackerNumber].category
+                            }
+                            
+                            switch category {
+                            case "Combattant":
+                                specialWarrior = true
+                            case "Nain":
+                                print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tFETICH TIME !"
+                                    + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre nain est en forme, il affligera double dégâts ce tour-ci !")
+                                damageInLoad += damageInLoad
+                            case "Colosse":
+                                specialColossus = true
+                            case "Magicien":
+                                specialWizardOn = true
+                            default:
+                                print("Pas d'action Fétiche ce tour ci ^^")
+                            }
+                            
+                        }
+                    }
                     
                     
                     
@@ -361,12 +389,112 @@ func battleMode() {
                     }
                     
                     
+                    //SPECIAL FETICH for the Warrior : Double Attack, so launch second attack after firstDamage
+                    if specialWarrior == true {
+                        print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tFETICH TIME !"
+                            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque")
+                        // TO SWITCH PLAYER ATTACK
+                        if randomInt == 1 {
+                            randomInt = 2
+                        } else {
+                            randomInt = 1
+                        }
+                        choiceDefender(randomInt: randomInt, damageInLoad: damageInLoad)
+                        actionPrint(lifePointP1: lifePointP1, lifePointP2: lifePointP2)
+                        // TO SWITCH PLAYER ATTACK
+                        if randomInt == 1 {
+                            randomInt = 2
+                        } else {
+                            randomInt = 1
+                        }
+                    }
+                    
+                    // SPECIAL FETICH for the Colossus : entiere Double Turn
+                    if specialColossus == true {
+                        print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tFETICH TIME !"
+                            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")
+                        // TO SWITCH PLAYER ATTACK
+                        if randomInt == 1 {
+                            randomInt = 2
+                        } else {
+                            randomInt = 1
+                        }
+                        damageInLoad = choiceAttackFrom(randomInt: randomInt)
+                        choiceDefender(randomInt: randomInt, damageInLoad: damageInLoad)
+                        actionPrint(lifePointP1: lifePointP1, lifePointP2: lifePointP2)
+                    }
+                    
+                    // SPECIAL FETICH for the Magician : Loop damage for all the opponent lifePoint Array
+                    if specialWizardOn == true {
+                        print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tFETICH TIME !"
+                            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre magicien envoi une Fireball et enlève 10 points de dommages à toute l'équipe adversaire")
+                        if randomInt == 1 { // for the team One
+                            for i in 0..<fighterArrayP1.count {
+                                print("\(fighterArrayP1[i].name) le \(fighterArrayP1[i].category) se retrouve à \(fighterArrayP1[i].lifePoint - 10)")
+                                fighterArrayP1[i].lifePoint -= 10
+                            }
+                        } else if randomInt == 2 { // for the team 2
+                            for i in 0..<fighterArrayP2.count {
+                                print("\(fighterArrayP2[i].name) le \(fighterArrayP2[i].category) se retrouve à \(fighterArrayP2[i].lifePoint - 10)")
+                                fighterArrayP2[i].lifePoint -= 10
+                            }
+                        }
+                    }
+                    
+                    
+                    // initialisation of special var
+                    specialWizardOn = false
+                    specialColossus = false
+                    specialWarrior = false
                     
                     
                     
-                    // BONUS ZONE  will appear here
-                    
-
+                    // BONUS ZONE :
+                    // If you're lucky, you can use your special attack
+                    // If you're lucky ++  you can use a critical attack
+                    // If you're really bad, your CRITICAL ATTACK is missed, and your attack is not on the opponent but on one of your fighter        let randomNumberChest = Int.random(in: 1..<5)
+                    let randomBonusZone = Int.random(in: 0..<11)
+                    var category = ""
+                    if randomBonusZone == 10 {
+                        if randomInt == 1 { // for the team One, take the category
+                            category = fighterArrayP1[attackerNumber].category
+                        } else if randomInt == 2 { // for the team 2
+                            category = fighterArrayP2[attackerNumber].category
+                        }
+                        switch category {
+                        case "Combattant":
+                            print("Afficher une histoire avec le combattant qui tue l'un des personnages adversaires au hasard")
+                        case "Nain":
+                            print("Afficher une histoire avec le nain qui tue l'un des personnages adversaires au hasard")
+                        case "Colosse":
+                            print("Afficher une histoire avec le colosse qui tue l'un des personnages adversaires au hasard")
+                        case "Magicien":
+                            print("Afficher une histoire avec le magicien qui réduit de moitié les points adversaires pour les donner à ses fighters")
+                        default:
+                            print("Pas d'action BONUS ce tour ci ^^")
+                        }
+                        
+                    }
+                    if randomBonusZone == 1 {
+                        if randomInt == 1 { // for the team One, take the category
+                            category = fighterArrayP1[attackerNumber].category
+                        } else if randomInt == 2 { // for the team 2
+                            category = fighterArrayP2[attackerNumber].category
+                        }
+                        switch category {
+                        case "Combattant":
+                            print("Afficher une histoire avec le combattant qui se tue lui meme sans faire exprès")
+                        case "Nain":
+                            print("Afficher une histoire avec le nain qui se tue lui meme sans faire exprès")
+                        case "Colosse":
+                            print("Afficher une histoire avec le colosse qui se tue lui meme sans faire exprès")
+                        case "Magicien":
+                            print("Afficher une histoire avec le magicien qui rate un sort et fait perdre la moitié des points de vie pour les donner à ses adversaires")
+                        default:
+                            print("Pas d'action Bonus ce tour ci ^^")
+                        }
+                        
+                    }
                 }
                 
             }
@@ -379,13 +507,14 @@ func battleMode() {
 
 
 
+
 /**
  choiceAttackFrom : Here we have to choose the Attacker
  */
 func choiceAttackFrom(randomInt: Int) -> Int {
     
     if randomInt == 1 {
-        print("\r\r\r🔴\(userArray[0].gamerName) : Avec quel Fighter désires tu attaquer ?")
+        print("\r\r\r🔴\(userArray[0].gamerName) : Avec quel Fighter désires tu agir ?")
         // TEST LOOP FOR TO ASK A QUESTION
         for nAttack in 0..<fighterArrayP1.count {
             if fighterArrayP1[nAttack].lifePoint > 0 {
@@ -393,7 +522,7 @@ func choiceAttackFrom(randomInt: Int) -> Int {
             }
         }
     } else {
-        print("\r\r\r🔵\(userArray[1].gamerName) : Avec quel Fighter désires tu attaquer ?")
+        print("\r\r\r🔵\(userArray[1].gamerName) : Avec quel Fighter désires tu agir ?")
         // TEST LOOP FOR TO ASK A QUESTION
         for nAttack in 0..<fighterArrayP2.count  {
             if fighterArrayP2[nAttack].lifePoint > 0 {
@@ -447,22 +576,6 @@ func choiceAttackFrom(randomInt: Int) -> Int {
 }
 
 
-/**
- healOrAttackFighter : To list with optimized code if it's an attack or a care (depend of FighterArray P1 or P2, and Category : Wizard or no)
- */
-func healOrAttackFighter(fighterArray: [Fighter], checkCategory: Bool) {
-    
-    for nDefend in 0..<fighterArray.count {
-        if fighterArray[nDefend].lifePoint > 0 {
-            if !checkCategory {
-                print("💢\(nDefend + 1). Attaque sur \(fighterArray[nDefend].name) le \(fighterArray[nDefend].category), reste \(fighterArray[nDefend].lifePoint) PV ")
-            } else {
-                print("💢\(nDefend + 1). Soin sur \(fighterArray[nDefend].name) le \(fighterArray[nDefend].category), reste \(fighterArray[nDefend].lifePoint) PV ")
-            }
-        }
-    }
-}
-
 
 
 /**
@@ -482,7 +595,6 @@ func randomChest(randomInt : Int, damageInLoad : Int) -> String? {
     let randomNumberChest = Int.random(in: 1..<5)
     if randomNumberChest == 2 {
         print("MICHEL MICHEL : Voir pour améliorer le code, il y a plein de doublon")
-        print("MICHEL MICHEL : Reflechir à davantage d'utilisation des objets pour ce changement d'armes")
         print("\r\rWaooow ! Quelle chance :")
         if checkCategory == false { // if it's not a wizard
             let resultGiftNumber = Int(arc4random_uniform(UInt32(weaponChestContent.count)))
@@ -514,7 +626,43 @@ func randomChest(randomInt : Int, damageInLoad : Int) -> String? {
 }
 
 
+/**
+ randomFetichNumber : Check random Fetich number : If it's ok : resultFetich Bool become true and special action will be proposed
+ */
+func randomFetichNumber(randomInt : Int) -> Bool? {
+    var resultFetich = false
+    let randomFetichNumber = Int.random(in: 1..<11)
+    
+    if randomInt == 1 {
+        if randomFetichNumber == fighterArrayP1[attackerNumber].numberFetich {
+            resultFetich = true
+        }
+    } else if randomInt == 2 {
+        if randomFetichNumber == fighterArrayP2[attackerNumber].numberFetich {
+            resultFetich = true
+        }
+    }
+    return resultFetich
+}
 
+
+
+
+/**
+ healOrAttackFighter : To list with optimized code if it's an attack or a care (depend of FighterArray P1 or P2, and Category : Wizard or no)
+ */
+func healOrAttackFighter(fighterArray: [Fighter], checkCategory: Bool) {
+    
+    for nDefend in 0..<fighterArray.count {
+        if fighterArray[nDefend].lifePoint > 0 {
+            if !checkCategory {
+                print("💢\(nDefend + 1). Attaque sur \(fighterArray[nDefend].name) le \(fighterArray[nDefend].category), reste \(fighterArray[nDefend].lifePoint) PV ")
+            } else {
+                print("💢\(nDefend + 1). Soin sur \(fighterArray[nDefend].name) le \(fighterArray[nDefend].category), reste \(fighterArray[nDefend].lifePoint) PV ")
+            }
+        }
+    }
+}
 
 
 
