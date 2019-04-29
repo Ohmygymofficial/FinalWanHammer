@@ -855,8 +855,6 @@ func randomBonus(randomInt: Int) {
             let resultNumberBonus = Int(arc4random_uniform(UInt32(bonusZoneFighter.count)))
             resultBonusToPrint = bonusZoneFighter[resultNumberBonus]
             historyPrint.hAttackerFActionStrenght = instantDamageValue[resultNumberBonus]
-            print("\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tBONUS ZONE !!!!!!"
-                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Votre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
             if randomInt == 1 { // apply damage to the good team
                 updateHistoryDefenderDamage(choiceDefenderLeRetour: defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP2, userTeamName: userArray[1].teamName, fromUnluckZone: fromUnluckZone)
             } else {
@@ -864,10 +862,8 @@ func randomBonus(randomInt: Int) {
             }
         case "Magicien":
             let resultNumberBonus = Int(arc4random_uniform(UInt32(bonusZoneWizard.count)))
-            let resultBonusToPrint = bonusZoneWizard[resultNumberBonus]
+            resultBonusToPrint = bonusZoneWizard[resultNumberBonus]
             historyPrint.hAttackerFActionStrenght = instantCareValue[resultNumberBonus]
-            print("\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tBONUS ZONE !!!!!!"
-                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Votre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
             if randomInt == 1 { // apply care to the good team
                 updateHistoryDefenderCare(choiceDefenderLeRetour: defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP1, userTeamName: userArray[0].teamName,fromUnluckZone: fromUnluckZone)
             } else {
@@ -876,7 +872,7 @@ func randomBonus(randomInt: Int) {
         default:
             print("Pas d'action BONUS ce tour ci ^^")
         }
-        actionPrintBonus(resultBonusToPrint: resultBonusToPrint)
+        actionPrintBonus(resultBonusToPrint: resultBonusToPrint, fromUnluckZone :fromUnluckZone )
     }
     
     
@@ -893,19 +889,15 @@ func randomBonus(randomInt: Int) {
             let resultNumberBonus = Int(arc4random_uniform(UInt32(unluckyZoneFighter.count)))
             resultBonusToPrint = unluckyZoneFighter[resultNumberBonus]
             historyPrint.hAttackerFActionStrenght = instantDamageValue[resultNumberBonus]
-            print("\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tUNLUCK ZONE !!!!!!"
-                + "\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Votre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
-            if randomInt == 1 { // apply damage to the attacker Team ... unluck !
+             if randomInt == 1 { // apply damage to the attacker Team ... unluck !
                 updateHistoryDefenderDamage(choiceDefenderLeRetour: defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP1, userTeamName: userArray[0].teamName, fromUnluckZone: fromUnluckZone)
             } else {
                 updateHistoryDefenderDamage(choiceDefenderLeRetour: defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP2, userTeamName: userArray[1].teamName, fromUnluckZone: fromUnluckZone)
             }
         case "Magicien":
             let resultNumberBonus = Int(arc4random_uniform(UInt32(unluckyZoneWizard.count)))
-            let resultBonusToPrint = unluckyZoneWizard[resultNumberBonus]
+            resultBonusToPrint = unluckyZoneWizard[resultNumberBonus]
             historyPrint.hAttackerFActionStrenght = instantCareValue[resultNumberBonus]
-            print("\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t UNLUCK ZONE !!!!!!"
-                + "\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Votre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
             if randomInt == 1 { // apply care to the opponent team ... unluck !
                 updateHistoryDefenderCare(choiceDefenderLeRetour: defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP2, userTeamName: userArray[1].teamName,fromUnluckZone: fromUnluckZone)
             } else {
