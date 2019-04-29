@@ -349,7 +349,6 @@ func battleMode() {
                             } else if randomInt == 2 { // for the team 2
                                 category = fighterArrayP2[attackerNumber].category
                             }
-                            
                             switch category {
                             case "Combattant":
                                 specialWarrior = true
@@ -365,14 +364,12 @@ func battleMode() {
                             default:
                                 print("Pas d'action Fétiche ce tour ci ^^")
                             }
-                            
                         }
                     }
                     
                     
                     // You have to choose which opponent on the action will be done
                     choiceDefender(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght)
-                    
                     
                     
                     
@@ -415,13 +412,6 @@ func battleMode() {
                         //historyTest.actionPrint()
                         //actionPrint(lifePointP1: lifePointP1, lifePointP2: lifePointP2)
                         actionPrint()
-                    }
-                    
-                    // TO SWITCH PLAYER ATTACK
-                    if randomInt == 1 {
-                        randomInt = 2
-                    } else {
-                        randomInt = 1
                     }
                 }
                 
@@ -513,10 +503,8 @@ func battleMode() {
                     default:
                         print("Pas d'action Bonus ce tour ci ^^")
                     }
-                    
                 }
             }
-            
         }
         print("La partie est terminée :")
         print("🔴Score final de la team \(userArray[0].teamName) du joueur \(userArray[0].gamerName) : \(fighterArrayP1[0].lifePoint + fighterArrayP1[1].lifePoint + fighterArrayP1[2].lifePoint)")
@@ -585,7 +573,11 @@ func choiceAttackFrom(randomInt: Int) -> Int {
                         checkCategory = false
                     }
                     // return damageInLoad
-                    print("Vérification ChoiceAttacker \(historyPrint.hAttackerFActionStrenght)")
+                    print("2eme Vérification dans ChoiceAttacker \(historyPrint.hAttackerTeamName)"
+                        + " \(historyPrint.hAttackerFActionStrenght)"
+                        + " \(historyPrint.hAttackerFName)"
+                        + " \(historyPrint.hAttackerFCategory)"
+                        + " \(historyPrint.hAttackerLifePoint)")
                     return historyPrint.hAttackerFActionStrenght
                     
                 } else if randomInt == 2 {
@@ -616,7 +608,6 @@ func choiceAttackFrom(randomInt: Int) -> Int {
             default: print("Je n'ai pas compris qui donne l'attaque. On recommence : ")
             }
         }
-        //   }
     }
     return choiceAttackFrom(randomInt: randomInt)
 }
@@ -628,20 +619,18 @@ func choiceAttackFrom(randomInt: Int) -> Int {
  */
 func UpdateHistoryAttacker(choiceAttackerLoop: Int, fighterArray : [Fighter], userTeamName : String) {
     
-    let historyPrint = History()
-    
+
     historyPrint.hAttackerTeamName = userTeamName
     historyPrint.hAttackerFActionStrenght = fighterArray[choiceAttackerLoop - 1].strenght
     historyPrint.hAttackerFName = fighterArray[choiceAttackerLoop - 1].name
     historyPrint.hAttackerFCategory = fighterArray[choiceAttackerLoop - 1].category
     historyPrint.hAttackerLifePoint = fighterArray[choiceAttackerLoop - 1].lifePoint
     
-    print("Vérification UpdateHistoryAttacker \(historyPrint.hAttackerTeamName)"
-    + " \(historyPrint.hAttackerFActionStrenght)"
-    + " \(historyPrint.hAttackerFName)"
-    + " \(historyPrint.hAttackerFCategory)"
-    + " \(historyPrint.hAttackerLifePoint)")
-    
+    print("Vérification dans UpdateHistoryAttacker \(historyPrint.hAttackerTeamName)"
+        + " \(historyPrint.hAttackerFActionStrenght)"
+        + " \(historyPrint.hAttackerFName)"
+        + " \(historyPrint.hAttackerFCategory)"
+        + " \(historyPrint.hAttackerLifePoint)")
 }
 
 
@@ -895,7 +884,8 @@ func  actionPrint() {
      */
     
     print("\r\t\t\t\t\t\t\t\t\t\t\tVoici la dernière action réalisée :"
-        + "\r\t\t\t\t\t\t\t\t\t\t\t\(historyPrint.hAttackerFName) le \(historyPrint.hAttackerFCategory) a fait son action sur \(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory)"
+        + "\r\t\t\t\t\t\t\t\t\t\t\t \(historyPrint.hAttackerFName) le \(historyPrint.hAttackerFCategory)"
+        + "\r\t\t\t\t\t\t\t\t\t\t\t a fait son action sur \(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory)"
         + "\r\t\t\t\t\t\t\t\t\t\t\tIl possède maintenant \(historyPrint.hDefenderFLifePoint) point de vies")
     print("\r\t\t\t\t\t\t\t\t\t\t\t🔴Score actuel de la team \(userArray[0].teamName) du joueur \(userArray[0].gamerName) : \(fighterArrayP1[0].lifePoint + fighterArrayP1[1].lifePoint + fighterArrayP1[2].lifePoint)")
     print("\t\t\t\t\t\t\t\t\t\t\t🔵Score actuel de la team \(userArray[1].teamName) du joueur \(userArray[1].gamerName) : \(fighterArrayP2[0].lifePoint + fighterArrayP2[1].lifePoint + fighterArrayP2[2].lifePoint)")
