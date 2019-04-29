@@ -16,6 +16,7 @@ var numberOfWizard = 0 // Because we can't have only Wizard in a team
 var numberOfFighter = 1 // to stop at 3 fighters
 var checkCategory = false
 var attackerNumber = 0
+var defenderNumber = 0
 var specialWizardOn = false
 var specialColossus = false
 var specialWarrior = false
@@ -460,50 +461,22 @@ func battleMode() {
                 
                 
                 // BONUS ZONE :
-                // If you're lucky, you can use your special attack
-                // If you're lucky ++  you can use a critical attack
-                // If you're really bad, your CRITICAL ATTACK is missed, and your attack is not on the opponent but on one of your fighter        let randomNumberChest = Int.random(in: 1..<5)
-                let randomBonusZone = Int.random(in: 0..<11)
-                var category = ""
-                if randomBonusZone == 10 {
-                    if randomInt == 1 { // for the team One, take the category
-                        category = fighterArrayP1[attackerNumber].category
-                    } else if randomInt == 2 { // for the team 2
-                        category = fighterArrayP2[attackerNumber].category
-                    }
-                    switch category {
-                    case "Combattant":
-                        print("Afficher une histoire avec le combattant qui tue l'un des personnages adversaires au hasard")
-                    case "Nain":
-                        print("Afficher une histoire avec le nain qui tue l'un des personnages adversaires au hasard")
-                    case "Colosse":
-                        print("Afficher une histoire avec le colosse qui tue l'un des personnages adversaires au hasard")
-                    case "Magicien":
-                        print("Afficher une histoire avec le magicien qui réduit de moitié les points adversaires pour les donner à ses fighters")
-                    default:
-                        print("Pas d'action BONUS ce tour ci ^^")
-                    }
-                    
+                // If you're lucky, you can use your critical attack
+                // If you're unlucky   you do a unlucky attack
+                // TO SWITCH PLAYER ATTACK
+                if randomInt == 1 {
+                    randomInt = 2
+                } else {
+                    randomInt = 1
                 }
-                if randomBonusZone == 1 {
-                    if randomInt == 1 { // for the team One, take the category
-                        category = fighterArrayP1[attackerNumber].category
-                    } else if randomInt == 2 { // for the team 2
-                        category = fighterArrayP2[attackerNumber].category
-                    }
-                    switch category {
-                    case "Combattant":
-                        print("Afficher une histoire avec le combattant qui se tue lui meme sans faire exprès")
-                    case "Nain":
-                        print("Afficher une histoire avec le nain qui se tue lui meme sans faire exprès")
-                    case "Colosse":
-                        print("Afficher une histoire avec le colosse qui se tue lui meme sans faire exprès")
-                    case "Magicien":
-                        print("Afficher une histoire avec le magicien qui rate un sort et fait perdre la moitié des points de vie pour les donner à ses adversaires")
-                    default:
-                        print("Pas d'action Bonus ce tour ci ^^")
-                    }
+                randomBonus(randomInt: randomInt)
+                // TO SWITCH PLAYER ATTACK
+                if randomInt == 1 {
+                    randomInt = 2
+                } else {
+                    randomInt = 1
                 }
+
             }
         }
         print("La partie est terminée :")
@@ -691,6 +664,8 @@ func randomChest(randomInt : Int) {
 }
 
 
+
+
 /**
  randomFetichNumber : Check random Fetich number : If it's ok : resultFetich Bool become true and special action will be proposed
  */
@@ -800,6 +775,7 @@ func choiceDefender(randomInt: Int, damageInLoad: Int) {
                 
             default: print("Je n'ai pas compris qui reçoit le coup. On recommence : ")
             }
+            defenderNumber = choiceDefenderLeRetour
         }
     }
 }
@@ -846,6 +822,91 @@ func updateHistoryDefenderCare(choiceDefenderLeRetour: Int, damageInLoad: Int, f
         + " \(historyPrint.hDefenderFLifePoint)")
     
 }
+
+
+
+/**
+ randomBONUS : Random BONUS (depend of Wizard or no)
+ */
+func randomBonus(randomInt: Int) {
+    
+    
+    let randomBonusZone = Int.random(in: 0..<2)
+    let category = historyPrint.hAttackerFCategory
+    
+    if randomBonusZone == 0 {
+        let bonusZoneFighter = ["bonus 1 fighter","bonus 2 fighter","bonus 3 fighter","bonus 4 fighter","bonus 5 fighter"]
+        let instantDamageValue = [55,65,75,65,55]
+        let bonusZoneWizard = ["bonus 1 Magicien","bonus 2 Magicien","bonus 3 Magicien","bonus 4 Magicien","bonus 5 Magicien"]
+        let instantCareValue = [55,65,75,65,55]
+        switch category {
+        case "Combattant", "Nain", "Colosse":
+            let resultNumberBonus = Int(arc4random_uniform(UInt32(bonusZoneFighter.count)))
+            let resultBonusToPrint = bonusZoneFighter[resultNumberBonus]
+            historyPrint.hAttackerFActionStrenght = instantDamageValue[resultNumberBonus]
+            print("\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tBONUS ZONE !!!!!!"
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Votre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
+            if randomInt == 1 { // apply damage to the good team
+                updateHistoryDefenderDamage(choiceDefenderLeRetour: defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP2, userTeamName: userArray[1].teamName)
+            } else {
+                updateHistoryDefenderDamage(choiceDefenderLeRetour: defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP1, userTeamName: userArray[0].teamName)
+            }
+        case "Magicien":
+            let resultNumberBonus = Int(arc4random_uniform(UInt32(bonusZoneWizard.count)))
+            let resultBonusToPrint = bonusZoneWizard[resultNumberBonus]
+            historyPrint.hAttackerFActionStrenght = instantCareValue[resultNumberBonus]
+            print("\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tBONUS ZONE !!!!!!"
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Votre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
+            if randomInt == 1 { // apply care to the good team
+                updateHistoryDefenderCare(choiceDefenderLeRetour: defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP1, userTeamName: userArray[0].teamName)
+            } else {
+                updateHistoryDefenderCare(choiceDefenderLeRetour: defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP2, userTeamName: userArray[1].teamName)
+            }
+        default:
+            print("Pas d'action BONUS ce tour ci ^^")
+        }
+        actionPrint()
+    }
+    
+    
+    if randomBonusZone == 1 {
+        let unluckyZoneFighter = ["unluck 1 fighter","unluck 2 fighter","unluck 3 fighter","unluck 4 fighter","unluck 5 fighter"]
+        let instantDamageValue = [55,65,75,65,55]
+        let unluckyZoneWizard = ["unluck 1 Magicien","unluck 2 Magicien","unluck 3 Magicien","unluck 4 Magicien","unluck 5 Magicien"]
+        let instantCareValue = [55,65,75,65,55]
+        switch category {
+        case "Combattant", "Nain", "Colosse":
+            let resultNumberBonus = Int(arc4random_uniform(UInt32(unluckyZoneFighter.count)))
+            let resultBonusToPrint = unluckyZoneFighter[resultNumberBonus]
+            historyPrint.hAttackerFActionStrenght = instantDamageValue[resultNumberBonus]
+            print("\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tUNLUCK ZONE !!!!!!"
+                + "\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Votre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
+            if randomInt == 1 { // apply damage to the attacker Team ... unluck !
+                updateHistoryDefenderDamage(choiceDefenderLeRetour: attackerNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP1, userTeamName: userArray[0].teamName)
+            } else {
+                updateHistoryDefenderDamage(choiceDefenderLeRetour: attackerNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP2, userTeamName: userArray[1].teamName)
+            }
+        case "Magicien":
+            let resultNumberBonus = Int(arc4random_uniform(UInt32(unluckyZoneWizard.count)))
+            let resultBonusToPrint = unluckyZoneWizard[resultNumberBonus]
+            historyPrint.hAttackerFActionStrenght = instantCareValue[resultNumberBonus]
+            print("\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t UNLUCK ZONE !!!!!!"
+                + "\r\r\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Votre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
+            if randomInt == 1 { // apply care to the opponent team ... unluck !
+                updateHistoryDefenderCare(choiceDefenderLeRetour: attackerNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP2, userTeamName: userArray[1].teamName)
+            } else {
+                updateHistoryDefenderCare(choiceDefenderLeRetour: attackerNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: fighterArrayP1, userTeamName: userArray[0].teamName)
+            }
+        default:
+            print("Pas d'action BONUS ce tour ci ^^")
+        }
+        actionPrint()
+    }
+}
+
+
+
+
 
 
 /**
