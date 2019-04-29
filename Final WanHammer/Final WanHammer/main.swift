@@ -25,6 +25,7 @@ let  historyPrint = History()
 var fromUnluckZone = false
 var nDefendAlive = 0
 var nAttackAlive = 0
+var alreadyDead = false
 
 
 
@@ -809,6 +810,8 @@ func updateHistoryDefenderDamage(choiceDefenderLeRetour: Int, damageInLoad: Int,
                 fighterArray[defenderRandomNumber].lifePoint -= historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
                 historyPrint.hDefenderFLifePoint = fighterArray[defenderRandomNumber].lifePoint //the others var in History to explain
                 if fighterArray[defenderRandomNumber].lifePoint <= 0 { // situation if The attacker dead HimSelf...have to go out of this loop
+                    fighterArray[choiceDefenderLeRetour].lifePoint = 0
+                    historyPrint.hDefenderFLifePoint = 0
                     return print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[defenderRandomNumber].name) le \(fighterArray[defenderRandomNumber].category) est mort ! 🦴🦴🦴")
                 }
             }
@@ -820,18 +823,23 @@ func updateHistoryDefenderDamage(choiceDefenderLeRetour: Int, damageInLoad: Int,
     
     // if the opponent is already dead with the previous attack : print a message
     if fighterArray[choiceDefenderLeRetour].lifePoint <= 0 {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 IL S'ACHAAAAAAARNE : \(fighterArray[choiceDefenderLeRetour].name) le \(fighterArray[choiceDefenderLeRetour].category) est déjà mort...au sol ! 🦴🦴🦴 Mais pourtant : ")
+        alreadyDead = true
     }
     
     historyPrint.hDefenderTeamName = userTeamName
     historyPrint.hDefenderFName = fighterArray[choiceDefenderLeRetour].name
     historyPrint.hDefenderFCategory = fighterArray[choiceDefenderLeRetour].category
     fighterArray[choiceDefenderLeRetour].lifePoint -= historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
+    historyPrint.hDefenderFLifePoint = fighterArray[choiceDefenderLeRetour].lifePoint //the others var in History to explain
     if fighterArray[choiceDefenderLeRetour].lifePoint <= 0 {
         fighterArray[choiceDefenderLeRetour].lifePoint = 0
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[choiceDefenderLeRetour].name) le \(fighterArray[choiceDefenderLeRetour].category) est mort ! 🦴🦴🦴")
+        historyPrint.hDefenderFLifePoint  = 0
+        if alreadyDead {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 IL S'ACHAAAAAAARNE : \(fighterArray[choiceDefenderLeRetour].name) le \(fighterArray[choiceDefenderLeRetour].category) est déjà mort...au sol ! 🦴🦴🦴 Mais pourtant : ")
+        } else {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[choiceDefenderLeRetour].name) le \(fighterArray[choiceDefenderLeRetour].category) est mort ! 🦴🦴🦴")
+        }
     }
-    historyPrint.hDefenderFLifePoint = fighterArray[choiceDefenderLeRetour].lifePoint //the others var in History to explain
 }
 
 
@@ -1031,6 +1039,19 @@ func lifePointConvert() {
     userArray[0].lifeTeam = fighterArrayP1[0].lifePoint + fighterArrayP1[1].lifePoint + fighterArrayP1[2].lifePoint
     userArray[1].lifeTeam = fighterArrayP2[0].lifePoint + fighterArrayP2[1].lifePoint + fighterArrayP2[2].lifePoint
     
+    
+    /*
+    print("ONLY FOR CHECK")
+    print("\(userArray[0].lifeTeam)")
+    print("\(fighterArrayP1[0].name) \(fighterArrayP1[0].lifePoint)")
+    print("\(fighterArrayP1[1].name) \(fighterArrayP1[1].lifePoint)")
+    print("\(fighterArrayP1[2].name) \(fighterArrayP1[2].lifePoint)")
+    
+    print("\(userArray[1].lifeTeam)")
+    print("\(fighterArrayP2[0].name) \(fighterArrayP2[0].lifePoint)")
+    print("\(fighterArrayP2[1].name) \(fighterArrayP2[1].lifePoint)")
+    print("\(fighterArrayP2[2].name) \(fighterArrayP2[2].lifePoint)")
+    */
     
 }
 
