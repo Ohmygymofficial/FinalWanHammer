@@ -11,9 +11,9 @@ import Foundation
 
 enum Weapon: String {
     
-    case sword = "Epée"
-    case axe = "Hâche"
-    case wand = "Baguette"
-    case fist = "Poing"
+    case sword = "son épée"
+    case axe = "sa hâche"
+    case wand = "sa baguette"
+    case fist = "son poing"
     
 }
