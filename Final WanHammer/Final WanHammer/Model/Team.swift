@@ -15,6 +15,7 @@ class Team {
     static let numberOfFighters = 3
     var winCounter = 0
     var looseCounter = 0
+    var lifeTeam = 0
     
     init(gamerName: String, teamName: String) {
         self.gamerName = gamerName
