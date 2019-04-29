@@ -603,7 +603,6 @@ func choiceAttackFrom(randomInt: Int) -> Int {
  */
 func UpdateHistoryAttacker(choiceAttackerLoop: Int, fighterArray : [Fighter], userTeamName : String) {
     
-    
     historyPrint.hAttackerTeamName = userTeamName
     historyPrint.hAttackerFActionStrenght = fighterArray[choiceAttackerLoop].strenght
     historyPrint.hAttackerFName = fighterArray[choiceAttackerLoop].name
@@ -621,13 +620,13 @@ func randomChest(randomInt : Int) {
     
     
     let weaponChestContent = ["une épée dorée","une hâche de Rahan","une grenade","un fléau d'arme","un tire-bouchon"]
-    let newValueWeaponChestContent = [15,25,30,25,5]
     let healthChestContent = ["une purée de brocoli","une barre protéinée","une whey à la banane","une framboise fraiche","un BigMac"]
-    let newValueHealthChestContent = [15,25,30,25,5]
+    let newValueWeaponChestContent = [15,25,30,25,5]
+    
     
     
     var resultGift = ""
-    let randomNumberChest = Int.random(in: 1..<5)
+    let randomNumberChest = Int.random(in: 1..<3)
     if randomNumberChest == 2 {
         print("\r\rWaooow ! Quelle chance !! Un coffre est apparu devant toi !")
         if checkCategory == false { // if it's Dwarf/Colossus/Warrior : USE weaponChestContent
@@ -635,26 +634,38 @@ func randomChest(randomInt : Int) {
             resultGift = weaponChestContent[resultGiftNumber]
             let resultStrenght = newValueWeaponChestContent[resultGiftNumber]
             if randomInt == 1 { //if it's TEAM 1
-                fighterArrayP1[attackerNumber].strenght = resultStrenght
+                updateStrenghtAndWeapon(fighterArray: fighterArrayP1, attackerNumber: attackerNumber, resultStrenght: resultStrenght, resultGift: resultGift)
+                /*
+                 fighterArrayP1[attackerNumber].strenght = resultStrenght
                 historyPrint.hAttackerFActionStrenght = fighterArrayP1[attackerNumber].strenght //update damage in History object
                 fighterArrayP1[attackerNumber].weapon = resultGift
+                */
             } else { //if it's TEAM 2
+                updateStrenghtAndWeapon(fighterArray: fighterArrayP2, attackerNumber: attackerNumber, resultStrenght: resultStrenght, resultGift: resultGift)
+                /*
                 fighterArrayP2[attackerNumber].strenght = resultStrenght
                 historyPrint.hAttackerFActionStrenght = fighterArrayP2[attackerNumber].strenght  //update damage in History object
                 fighterArrayP2[attackerNumber].weapon = resultGift
+                */
             }
         } else if checkCategory == true { // if it's a wizard : : USE healthChestContent
             let resultGiftNumber = Int(arc4random_uniform(UInt32(healthChestContent.count)))
             resultGift = healthChestContent[resultGiftNumber]
-            let resultHealth = newValueHealthChestContent[resultGiftNumber]
+            let resultStrenght = newValueWeaponChestContent[resultGiftNumber]
             if randomInt == 1 {
+                updateStrenghtAndWeapon(fighterArray: fighterArrayP1, attackerNumber: attackerNumber, resultStrenght: resultStrenght, resultGift: resultGift)
+                /*
                 fighterArrayP1[attackerNumber].strenght = resultHealth
                 historyPrint.hAttackerFActionStrenght = fighterArrayP1[attackerNumber].strenght
                 fighterArrayP1[attackerNumber].weapon = resultGift
+                */
             } else {
+                updateStrenghtAndWeapon(fighterArray: fighterArrayP2, attackerNumber: attackerNumber, resultStrenght: resultStrenght, resultGift: resultGift)
+                /*
                 fighterArrayP2[attackerNumber].strenght = resultHealth
                 historyPrint.hAttackerFActionStrenght = fighterArrayP2[attackerNumber].strenght
                 fighterArrayP2[attackerNumber].weapon = resultGift
+                */
             }
         }
         if resultGift != "" {
@@ -666,6 +677,19 @@ func randomChest(randomInt : Int) {
 
 
 
+
+
+/**
+ updateStrenghtAndWeapon : For update the weapon and Strenght of the good FighterArray with the good GIFT
+ */
+
+func updateStrenghtAndWeapon(fighterArray: [Fighter], attackerNumber: Int, resultStrenght: Int, resultGift: String) {
+    
+    fighterArray[attackerNumber].strenght = resultStrenght
+    historyPrint.hAttackerFActionStrenght = fighterArray[attackerNumber].strenght //update damage in History object
+    fighterArray[attackerNumber].weapon = resultGift
+    
+}
 
 /**
  randomFetichNumber : Check random Fetich number : If it's ok : resultFetich Bool become true and special action will be proposed
@@ -810,8 +834,8 @@ func updateHistoryDefenderDamage(choiceDefenderLeRetour: Int, damageInLoad: Int,
                 fighterArray[defenderRandomNumber].lifePoint -= historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
                 historyPrint.hDefenderFLifePoint = fighterArray[defenderRandomNumber].lifePoint //the others var in History to explain
                 if fighterArray[defenderRandomNumber].lifePoint <= 0 { // situation if The attacker dead HimSelf...have to go out of this loop
-                    fighterArray[choiceDefenderLeRetour].lifePoint = 0
-                    historyPrint.hDefenderFLifePoint = 0
+                    // fighterArray[choiceDefenderLeRetour].lifePoint = 0
+                    // historyPrint.hDefenderFLifePoint = 0
                     return print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[defenderRandomNumber].name) le \(fighterArray[defenderRandomNumber].category) est mort ! 🦴🦴🦴")
                 }
             }
@@ -832,8 +856,8 @@ func updateHistoryDefenderDamage(choiceDefenderLeRetour: Int, damageInLoad: Int,
     fighterArray[choiceDefenderLeRetour].lifePoint -= historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
     historyPrint.hDefenderFLifePoint = fighterArray[choiceDefenderLeRetour].lifePoint //the others var in History to explain
     if fighterArray[choiceDefenderLeRetour].lifePoint <= 0 {
-        fighterArray[choiceDefenderLeRetour].lifePoint = 0
-        historyPrint.hDefenderFLifePoint  = 0
+        // fighterArray[choiceDefenderLeRetour].lifePoint = 0
+        // historyPrint.hDefenderFLifePoint  = 0
         if alreadyDead {
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 IL S'ACHAAAAAAARNE : \(fighterArray[choiceDefenderLeRetour].name) le \(fighterArray[choiceDefenderLeRetour].category) est déjà mort...au sol ! 🦴🦴🦴 Mais pourtant : ")
         } else {
@@ -1021,8 +1045,7 @@ func  actionPrintBonus(resultBonusToPrint: String, fromUnluckZone : Bool) {
  */
 func lifePointConvert() {
     
-    /*
-     Convert directly in func defenderDamage... maybe i can delete this part, keep to check
+    
     for n in 0..<fighterArrayP1.count {
         if fighterArrayP1[n].lifePoint <= 0 {
             fighterArrayP1[n].lifePoint = 0
@@ -1033,7 +1056,7 @@ func lifePointConvert() {
             fighterArrayP2[n].lifePoint = 0
         }
     }
-    */
+    
     
     // update userArray Life Team
     userArray[0].lifeTeam = fighterArrayP1[0].lifePoint + fighterArrayP1[1].lifePoint + fighterArrayP1[2].lifePoint
