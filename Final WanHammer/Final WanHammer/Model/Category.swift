@@ -14,7 +14,8 @@ enum Category: String {
     
     case warrior = "Combattant"
     case dwarf = "Nain"
-    case wizard = "Magicien"
     case colossus = "Colosse"
+    case wizard = "Magicien"
+    
     
 }
