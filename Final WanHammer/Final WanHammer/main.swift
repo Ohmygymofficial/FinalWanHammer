@@ -10,7 +10,7 @@ import Foundation
 
 
 // MARK: var declaration
-var stayInProgram = true
+var stayInProgram = true // BOOL to stay in program
 var numberOfTeam = 0 // to switch team One and team Two
 var numberOfWizard = 0 // Because we can't have only Wizard in a team
 var numberOfFighter = 1 // to stop at 3 fighters
@@ -35,7 +35,6 @@ var alreadyDead = false
 var fighterArrayP1 = [Fighter]()   // for the team1
 var fighterArrayP2 = [Fighter]()  // for the team2
 var userArray = [Team]()  //  to archive User's Name / total LifePoint / Round Win and loose
-var actionArray : [Any] = ["Joueur1", "Fighter1", "Categorie1", "LifePoint1","Joueur2", "Fighter2", "Categorie2", "LifePoint2"]
 var arrayGoodIndex = [0,1,2]
 
 
@@ -158,21 +157,17 @@ func chooseFighter() {
         if let choiceMenu1 = readLine() {
             switch choiceMenu1 {
             case "1":
-                let fighterChoosen = "Combattant"
-                addFighter(category: fighterChoosen)
+                addFighter(category: Category.warrior)
             case "2":
-                let fighterChoosen = "Nain"
-                addFighter(category: fighterChoosen)
+                addFighter(category: Category.dwarf)
             case "3":
-                let fighterChoosen = "Colosse"
-                addFighter(category: fighterChoosen)
+                addFighter(category: Category.colossus)
             case "4":
-                let fighterChoosen = "Magicien"
                 if numberOfWizard >= 2 {
                     print("Désolé, vous ne pouvez pas choisir que des magiciens dans votre Team ;)")
                     chooseFighter()
                 }
-                addFighter(category: fighterChoosen)
+                addFighter(category: Category.wizard)
             case "5":
                 print("Voici les caractéristiques des personnages :"
                     + "\n 🗡 Le combattant : PV : 100, Dégâts : 10, Action : 1, spécial : Double Attaque"
@@ -181,7 +176,7 @@ func chooseFighter() {
                     + "\n 🧙‍♀️ Le magicien : PV : 150, Soins : +15, Action : 1, spécial : FireBall dégâts 30")
                 
                 print("Presser une touche pour continuer")
-                if let _ = readLine() {
+                if readLine() != nil {
                     chooseFighter()
                 }
             default:
@@ -210,24 +205,22 @@ func chooseFighter() {
 /**
  addFighter : In this function : Adding fighter in the good user Array
  */
-func addFighter(category: String) {
+func addFighter(category: Category) {
     
     print("\rOk pour le \(category) !")
     let nameOfTheFighterOk = nameOfTheFighter()
     let numberFetichOk = numberFetich()
     var fighterInLoad = Fighter(name: "", numberFetich: 0)
     switch category {
-    case "Combattant":
+    case .warrior:
         fighterInLoad = Warrior(name: nameOfTheFighterOk, numberFetich: numberFetichOk)
-    case "Nain":
+    case .dwarf:
         fighterInLoad = Dwarf(name: nameOfTheFighterOk, numberFetich: numberFetichOk)
-    case "Colosse":
+    case .colossus:
         fighterInLoad = Colossus(name: nameOfTheFighterOk, numberFetich: numberFetichOk)
-    case "Magicien":
+    case .wizard:
         fighterInLoad = Wizard(name: nameOfTheFighterOk, numberFetich: numberFetichOk)
         numberOfWizard += 1
-    default:
-        fighterInLoad = Fighter(name: "DEFAULT", numberFetich: 5) //never happen
     }
     if numberOfTeam == 0 { // add new object in the good Array depend of it's the TEAM 1 or the TEAM 2
         fighterArrayP1.append(fighterInLoad)
@@ -289,20 +282,20 @@ func numberFetich() -> Int {
  */
 func battleMode() {
     print("\r\r\r\r\r😈😈 Tous les combattants sont choisis : Presser une touche pour que le WANHAMMER commence !😈😈 ")
-    if let _ = readLine() {
+    if readLine() != nil {
         
         lifePointConvert() // initialize userArray[].Lifepoint value to check if one TEAM is DEAD
         checkAllTeamLifePoint() // Print all the fighters LifePoint
         print("Appuyer sur la touche ENTRER pour continuer")
         
-        if let _ = readLine() {
+        if readLine() != nil {
             var countAction = 0 // initialize countAction to check if it's the first Round
             var randomInt : Int = 1 //Variable for random choice, or logical choice
-            while userArray[0].lifeTeam > 0 || userArray[0].lifeTeam  > 0 { // LOOP HERE IF THERE IS AT LEAST ONE FIGHTER ALIVE IN EACH TEAM
+            while userArray[0].lifeTeam > 0 || userArray[1].lifeTeam  > 0 { // LOOP HERE IF THERE IS AT LEAST ONE FIGHTER ALIVE IN EACH TEAM
                 if countAction == 0 { //Random choice for the First Player who give the first attack
                     randomInt = Int.random(in: 1..<3)
                 }
-                if let _ = readLine() {
+                if readLine() != nil {
                     // CHOICE ATTACKER MENU
                     historyPrint.hAttackerFActionStrenght = choiceAttackFrom(randomInt: randomInt)
                     
@@ -318,7 +311,7 @@ func battleMode() {
                     countAction += 1 // one damage or care has been done : countAction have to be increase
                     
                     if countAction != 0 { // print Result only if at least one action was ok
-                        actionPrint(resultBonusToPrint: "")
+                        historyPrint.actionPrint(resultBonusToPrint: "")
                     }
                     
                     // APPLY FETICH BONUS FOR THE OTHERS ATTACKERS (Warrior, Colossus, Wizard)
@@ -326,7 +319,7 @@ func battleMode() {
                 }
                 
                 
-                if let _ = readLine() {
+                if readLine() != nil {
                     // BONUS UNLUCK ZONE : If you're lucky, you can use your critical attack, if not you do an unlucky action
                     randomBonus(randomInt: randomInt)
                     
@@ -362,6 +355,10 @@ func loopChoiceAttackFrom(fighterArray : [Fighter]) {
     }
 }
 
+
+
+
+
 /**
  choiceAttackFrom : Here we have to choose the Attacker
  */
@@ -382,7 +379,7 @@ func choiceAttackFrom(randomInt: Int) -> Int {
         if var choiceAttackerLoop = Int(choiceAttacker) {
             if choiceAttackerLoop <= 0 || choiceAttackerLoop > nAttackAlive {
                 print("Vous ne pouvez choisir qu'un numéro correspondant au choix proposé : On recommence ^^")
-                let _ = choiceAttackFrom(randomInt: randomInt)
+                return choiceAttackFrom(randomInt: randomInt)
             }
             choiceAttackerLoop = arrayGoodIndex[choiceAttackerLoop - 1]
             switch choiceAttackerLoop {
@@ -403,7 +400,7 @@ func choiceAttackFrom(randomInt: Int) -> Int {
             }
         }
         print("Vous devez choisir un chiffre attaquant. On recommence : ")
-        let _ = choiceAttackFrom(randomInt: randomInt)
+        return choiceAttackFrom(randomInt: randomInt)
     }
     return choiceAttackFrom(randomInt: randomInt)
 }
@@ -439,7 +436,7 @@ func randomChest(randomInt : Int) {
     let randomNumberChest = Int.random(in: 1..<3)
     if randomNumberChest == 2 {
         print("\r\rWaooow ! Quelle chance !! Un coffre est apparu devant toi !")
-        if checkCategory == false { // if it's Dwarf/Colossus/Warrior : USE weaponChestContent
+        if !checkCategory  { // if it's Dwarf/Colossus/Warrior : USE weaponChestContent
             let resultGiftNumber = Int(arc4random_uniform(UInt32(weaponChestContent.count)))
             resultGift = weaponChestContent[resultGiftNumber]
             let resultStrenght = newValueWeaponChestContent[resultGiftNumber]
@@ -448,7 +445,7 @@ func randomChest(randomInt : Int) {
             } else { //if it's TEAM 2  take strenght in P2
                 updateStrenghtAndWeapon(fighterArray: fighterArrayP2, attackerNumber: attackerNumber, resultStrenght: resultStrenght, resultGift: resultGift)
             }
-        } else if checkCategory == true { // if it's a wizard : : USE healthChestContent
+        } else if checkCategory { // if it's a wizard : : USE healthChestContent
             let resultGiftNumber = Int(arc4random_uniform(UInt32(healthChestContent.count)))
             resultGift = healthChestContent[resultGiftNumber]
             let resultStrenght = newValueWeaponChestContent[resultGiftNumber]
@@ -530,7 +527,7 @@ func applyFetichBonus(randomInt : Int) {
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque")
         choiceDefender(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght)
         specialWarrior = false
-        actionPrint(resultBonusToPrint: "")
+        historyPrint.actionPrint(resultBonusToPrint: "")
     }
     
     
@@ -540,7 +537,7 @@ func applyFetichBonus(randomInt : Int) {
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")
         historyPrint.hAttackerFActionStrenght = choiceAttackFrom(randomInt: randomInt)
         choiceDefender(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght)
-        actionPrint(resultBonusToPrint: "")
+        historyPrint.actionPrint(resultBonusToPrint: "")
         specialColossus = false
     }
     
@@ -559,7 +556,7 @@ func applyFetichBonus(randomInt : Int) {
                 fighterArrayP1[i].lifePoint -= 10
             }
         }
-        actionPrint(resultBonusToPrint: "")
+        historyPrint.actionPrint(resultBonusToPrint: "")
         specialWizardOn = false
     }
 }
@@ -701,7 +698,6 @@ func updateHistoryDefenderDamage(choiceDefenderLeRetour: Int, damageInLoad: Int,
 
 func updateHistoryDefenderCare(choiceDefenderLeRetour: Int, damageInLoad: Int, fighterArray: [Fighter], userTeamName: String) {
     
-    
     if fromUnluckZone == true { // if this action come from UNLUCK ZONE, damage will be activate for random alive Fighter in the opponent Array
         repeat {
             defenderRandomNumber = Int(arc4random_uniform(UInt32(fighterArray.count)))
@@ -715,14 +711,11 @@ func updateHistoryDefenderCare(choiceDefenderLeRetour: Int, damageInLoad: Int, f
         }  while fighterArray[defenderRandomNumber].lifePoint <= 0
         return print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPas de chance !")
     }
-    
     historyPrint.hDefenderTeamName = userTeamName
     historyPrint.hDefenderFName = fighterArray[choiceDefenderLeRetour].name
     historyPrint.hDefenderFCategory =  fighterArray[choiceDefenderLeRetour].category
     fighterArray[choiceDefenderLeRetour].lifePoint += historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
     historyPrint.hDefenderFLifePoint = fighterArray[choiceDefenderLeRetour].lifePoint //the others var in History to explain
-    
-    
 }
 
 
@@ -808,27 +801,27 @@ func randomBonus(randomInt: Int) {
 
 
 
+/**
+ displayTeamAndFighterLifePoint : To loop on the good Fighter and user Array
+ */
 
 
-
+func displayTeamAndFighterLifePoint(userArray: Team, fighterArray : [Fighter], symbol : String ) {
+    // You can check life point of each fighters
+    print("\(symbol) TEAM \(userArray.teamName) PV : \(userArray.lifeTeam)")
+    print("\(symbol)Voici l'état actuel de tes fighters")
+    for fighter in fighterArray {
+        print("\(symbol)Le \(fighter.category) \(fighter.name) possède \(fighter.lifePoint) PV")
+    }
+    print("\(symbol)\(symbol)\(symbol)\(symbol)\(symbol)\(symbol)\(symbol)\(symbol)\(symbol)\(symbol)\(symbol)")
+}
 
 /**
  checkAllTeamLifePoint : Print the array of the team to check LifePoint of each Fighters
  */
 func checkAllTeamLifePoint() {
-    // You can check life point of each fighters
-    print("🔴TEAM \(userArray[0].teamName) PV : \(userArray[0].lifeTeam)")
-    print("🔴Voici l'état actuel de tes fighters")
-    for i in 0..<fighterArrayP1.count  {
-        print("🔴Le \(fighterArrayP1[i].category) \(fighterArrayP1[i].name) possède \(fighterArrayP1[i].lifePoint) PV")
-    }
-    print("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
-    print("\r🔵TEAM \(userArray[1].teamName) PV : \(userArray[1].lifeTeam)")
-    print("🔵Voici l'état actuel de chaque fighters de la team \(userArray[1].teamName)")
-    for i in 0..<fighterArrayP1.count  {
-        print("🔵Le \(fighterArrayP2[i].category) \(fighterArrayP2[i].name) possède \(fighterArrayP2[i].lifePoint) PV")
-    }
-    print("🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵")
+    displayTeamAndFighterLifePoint(userArray: userArray[0], fighterArray: fighterArrayP1, symbol: "🔴")
+    displayTeamAndFighterLifePoint(userArray: userArray[1], fighterArray: fighterArrayP2, symbol: "🔵")
 }
 
 
@@ -874,12 +867,12 @@ func lifePointConvert() {
     
     //to reset negative count to 0 and don't have error in addition mode
     for n in 0..<fighterArrayP1.count {
-        if fighterArrayP1[n].lifePoint <= 0 {
+        if fighterArrayP1[n].lifePoint < 0 {
             fighterArrayP1[n].lifePoint = 0
         }
     }
     for n in 0..<fighterArrayP2.count {
-        if fighterArrayP2[n].lifePoint <= 0 {
+        if fighterArrayP2[n].lifePoint < 0 {
             fighterArrayP2[n].lifePoint = 0
         }
     }

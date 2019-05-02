@@ -17,5 +17,4 @@ enum Category: String {
     case colossus = "Colosse"
     case wizard = "Magicien"
     
-    
 }

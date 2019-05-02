@@ -26,27 +26,45 @@ class History {
     var hDefenderFLifePoint = 0
     
     
-    /*
-    init(histAttackerFighter:String, histAttackerCategory: String, histDefenderFighter: String, histDefenderCategory: String, histDefenderLifePoint: Int) {
-        self.histAttackerFighter = histAttackerFighter
-        self.histAttackerCategory = histAttackerCategory
-        self.histDefenderFighter = histDefenderFighter
-        self.histDefenderCategory = histDefenderCategory
-        self.histDefenderLifePoint = histDefenderLifePoint
-    }
-    */
+
     
-    /*
-    func actionPrin(history: History) {
+    
+    func actionPrint(resultBonusToPrint: String) {
+    
+        lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used
+        // take a var to print different word (depend of category : Wizard or no)
+        var attackOrCare = ""
+        var gainOrLoose = ""
+        if checkCategory {
+            attackOrCare = "un soin"
+            gainOrLoose = "reçoit"
+        } else {
+            attackOrCare = "une attaque"
+            gainOrLoose = "perd"
+        }
         
-        
+        if bonusOrUnluckZone == true || fromUnluckZone == true {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
+            if historyPrint.hAttackerFName == historyPrint.hDefenderFName {
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t....lui même ^^' !!")
+            } else {
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory) !!")
+            }
+        } else {
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Voici l'historique de l'action réalisée : "
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Action Classique : \(historyPrint.hAttackerFName) le \(historyPrint.hAttackerFCategory)"
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t a fait \(attackOrCare) sur \(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory)")
+        }
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCelui-ci \(gainOrLoose) \(historyPrint.hAttackerFActionStrenght) PV et en possède maintenant \(historyPrint.hDefenderFLifePoint)")
+    
+        /*
         print("\r\t\t\t\t\t\t\t\t\t\t\tVoici la dernière action réalisée :"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\(hAttackerFName) le \(hAttackerFCategory) a fait son action sur \(hDefenderFName) le \(hDefenderFCategory)"
             + "\r\t\t\t\t\t\t\t\t\t\t\tIl possède maintenant \(hDefenderFLifePoint) point de vies")
         print("\r\t\t\t\t\t\t\t\t\t\t\t🔴Score actuel de la team \(hAttackerTeamName) du joueur \(hAttackerUserName) : \(hAttackerLifePoint)")
         print("\t\t\t\t\t\t\t\t\t\t\t🔵Score actuel de la team \(hDefenderTeamName) du joueur \(hDefenderUserName) : \(hDefenderFLifePoint)")
-    }
- */
     
+         */
+    }
 }
 
