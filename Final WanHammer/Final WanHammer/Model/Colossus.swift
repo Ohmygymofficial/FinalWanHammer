@@ -20,7 +20,15 @@ class Colossus : Fighter {
         self.special = Special.fear.rawValue
         self.lifePoint = 200
         self.strenght = 5
-        self.attempt = 1
         self.category = Category.colossus.rawValue
+    }
+    
+    func specialColossus(randomInt: Int, damageInLoad: Int, resultBonusToPrint: String) {
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
+            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")
+        historyPrint.hAttackerFActionStrenght = choiceAttackFrom(randomInt: randomInt)
+        choiceDefender(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght)
+        historyPrint.actionPrint(resultBonusToPrint: "")
+        specialFetichAction = false
     }
 }

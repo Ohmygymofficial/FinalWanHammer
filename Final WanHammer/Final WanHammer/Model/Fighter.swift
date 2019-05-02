@@ -20,7 +20,6 @@ class Fighter {
     var special: String = Special.doubleAttack.rawValue
     var lifePoint: Int = 100
     var strenght: Int = 10
-    var attempt: Int = 1
     
     init(name: String, numberFetich: Int) {
         self.name = name

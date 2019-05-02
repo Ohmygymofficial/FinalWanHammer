@@ -18,7 +18,12 @@ class Dwarf : Fighter {
         self.special = Special.doubleDamage.rawValue
         self.lifePoint = 80
         self.strenght = 20
-        self.attempt = 1
         self.category = Category.dwarf.rawValue
+    }
+    
+    func specialDwarf() {
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
+            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre nain est en forme, il affligera double dégâts ce tour-ci !")
+        historyPrint.hAttackerFActionStrenght +=  historyPrint.hAttackerFActionStrenght
     }
 }

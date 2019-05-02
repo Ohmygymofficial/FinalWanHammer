@@ -18,9 +18,7 @@ var checkCategory = false
 var attackerNumber = 0
 var defenderNumber = 0
 var defenderRandomNumber = 0
-var specialWizardOn = false
-var specialColossus = false
-var specialWarrior = false
+var specialFetichAction = false
 let  historyPrint = History()
 var fromUnluckZone = false
 var bonusOrUnluckZone = false
@@ -308,9 +306,11 @@ func battleMode() {
                     // CHOICE DEFENDER MENU
                     choiceDefender(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght)
                     
-                    countAction += 1 // one damage or care has been done : countAction have to be increase
+                    // one damage or care has been done : countAction have to be increase
+                    countAction += 1
                     
-                    if countAction != 0 { // print Result only if at least one action was ok
+                    // print Result only if at least one action was ok
+                    if countAction != 0 {
                         historyPrint.actionPrint(resultBonusToPrint: "")
                     }
                     
@@ -334,6 +334,7 @@ func battleMode() {
             print("La partie est terminée :")
             print("🔴Score final de la team \(userArray[0].teamName) du joueur \(userArray[0].gamerName) : \(fighterArrayP1[0].lifePoint + fighterArrayP1[1].lifePoint + fighterArrayP1[2].lifePoint)")
             print("🔵Score final de la team \(userArray[1].teamName) du joueur \(userArray[1].gamerName) : \(fighterArrayP2[0].lifePoint + fighterArrayP2[1].lifePoint + fighterArrayP2[2].lifePoint)")
+            addWinAndLooseValue()
             
         }
     }
@@ -457,7 +458,7 @@ func randomChest(randomInt : Int) {
         }
         if resultGift != "" {
             print("C'est \(resultGift) ! Tu t'en équipes !"
-                + "Ta puissance d'action est passée à : \(historyPrint.hAttackerFActionStrenght) ")
+            + "Ta puissance d'action est maintenant de : \(historyPrint.hAttackerFActionStrenght)")
         }
     }
 }
@@ -497,18 +498,17 @@ func randomFetichNumber(randomInt : Int) {
     }
     
     if fetichOk {
-        let category = historyPrint.hAttackerFCategory
-        switch category {
+        
+        switch historyPrint.hAttackerFCategory {
         case "Combattant":
-            specialWarrior = true
+            specialFetichAction = true
         case "Nain":
-            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
-                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre nain est en forme, il affligera double dégâts ce tour-ci !")
-            historyPrint.hAttackerFActionStrenght +=  historyPrint.hAttackerFActionStrenght
+            let specialInLoad = Dwarf(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+            specialInLoad.specialDwarf()
         case "Colosse":
-            specialColossus = true
+            specialFetichAction = true
         case "Magicien":
-            specialWizardOn = true
+            specialFetichAction = true
         default:
             print("Pas d'action Fétiche ce tour ci ^^")
         }
@@ -522,43 +522,23 @@ func randomFetichNumber(randomInt : Int) {
 func applyFetichBonus(randomInt : Int) {
     
     //SPECIAL FETICH for the Warrior : Double Attack, so launch second attack after firstDamage
-    if specialWarrior == true {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque")
-        choiceDefender(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght)
-        specialWarrior = false
-        historyPrint.actionPrint(resultBonusToPrint: "")
+    if specialFetichAction == true,  historyPrint.hAttackerFCategory == "Combattant" {
+        let specialInLoad = Warrior(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+        specialInLoad.specialWarrior(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght, resultBonusToPrint: "")
     }
     
-    
     // SPECIAL FETICH for the Colossus : entiere Double Turn
-    if specialColossus == true {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")
-        historyPrint.hAttackerFActionStrenght = choiceAttackFrom(randomInt: randomInt)
-        choiceDefender(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght)
-        historyPrint.actionPrint(resultBonusToPrint: "")
-        specialColossus = false
+    if specialFetichAction == true,  historyPrint.hAttackerFCategory == "Colosse" {
+        let specialInLoad = Colossus(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+        specialInLoad.specialColossus(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght, resultBonusToPrint: "")
     }
     
     // SPECIAL FETICH for the Magician : Loop damage for all the opponent lifePoint Array
-    if specialWizardOn == true {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre magicien envoi une Fireball et enlève 10 points de dommages à toute l'équipe adversaire")
-        if randomInt == 1 { // for the team One
-            for i in 0..<fighterArrayP2.count {
-                print("\(fighterArrayP2[i].name) le \(fighterArrayP2[i].category) se retrouve à \(fighterArrayP2[i].lifePoint - 10)")
-                fighterArrayP1[i].lifePoint -= 10
-            }
-        } else if randomInt == 2 { // for the team 2
-            for i in 0..<fighterArrayP1.count {
-                print("\(fighterArrayP1[i].name) le \(fighterArrayP1[i].category) se retrouve à \(fighterArrayP1[i].lifePoint - 10)")
-                fighterArrayP1[i].lifePoint -= 10
-            }
-        }
-        historyPrint.actionPrint(resultBonusToPrint: "")
-        specialWizardOn = false
+    if specialFetichAction == true,  historyPrint.hAttackerFCategory == "Magicien" {
+        let specialInLoad = Wizard(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+        specialInLoad.specialWizard(randomInt: randomInt, resultBonusToPrint: "")
     }
+    
 }
 
 
@@ -767,7 +747,7 @@ func randomBonus(randomInt: Int) {
         fromUnluckZone = true
         var resultBonusToPrint = ""
         let unluckyZoneFighter = ["prend confiance et envoit un autre coup puissant .... mais il glisse et crée une blessure au ventre sur ","dans son élan d'attaque, ajoute un revers puissant..mais il manque son coup et crée une blessure au bras sur ","énervé, prend appui sur un arbre, pour envoyer un coup fatal en pleine gorge...mais l'arbre est glissant, il rate son attaque et crée une profonde blessure sur ","utilise son courage pour ajouter des coups de tête...mais désorienté, il crée des blessures sur ","nous fait un coup retourné supplémentaire ...son arme lui glisse des mains et il crée une entaille sur "]
-        let instantDamageValue = [90,90,90,90,90]
+        let instantDamageValue = [50,60,90,60,50]
         let unluckyZoneWizard = ["rassemble sa concentration pour lancer un soin puissant...mais il est déconcentré et son soin est envoyé sur ","ajoute 2 mouvements spéciaux pour soigner encore ! Mouvements râtés....les soins arrivent sur ","utilise sa dernière formule ! Un soin puissant est invoqué! Mais la formule est pas la bonne... et elle soigne "]
         let instantCareValue = [50,60,90]
         
@@ -928,6 +908,24 @@ func demoMode() {
     
 }
 
+
+
+/**
+ addWinAndLooseValue : At the end of the Game, give +1 to the value Win or Loose for each Team
+ */
+
+func addWinAndLooseValue () {
+    
+    if userArray[0].lifeTeam < userArray[1].lifeTeam {
+        userArray[0].looseCounter += 1
+        userArray[1].winCounter += 1
+        print("Un point de Victoire pour la team \(userArray[1].teamName) de \(userArray[1].gamerName)")
+    } else {
+        userArray[1].looseCounter += 1
+        userArray[0].winCounter += 1
+        print("Un point de Victoire pour la team \(userArray[0].teamName) de \(userArray[0].gamerName)")
+    }
+}
 
 // LOOP FOR THE PROGRAM
 

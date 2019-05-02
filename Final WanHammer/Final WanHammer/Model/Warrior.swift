@@ -19,7 +19,14 @@ class Warrior : Fighter {
         self.special = Special.doubleAttack.rawValue
         self.lifePoint = 100
         self.strenght = 10
-        self.attempt = 1
+    }
+    
+    func specialWarrior(randomInt: Int, damageInLoad: Int, resultBonusToPrint: String) {
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
+            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque")
+        choiceDefender(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght)
+        specialFetichAction = false
+        historyPrint.actionPrint(resultBonusToPrint: "")
     }
 }
 

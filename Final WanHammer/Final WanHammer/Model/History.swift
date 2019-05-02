@@ -15,7 +15,18 @@ class History {
     var hAttackerLifePoint = 0
     var hAttackerFName = ""
     var hAttackerFCategory = ""
-    var hAttackerFActionStrenght = 0
+    var hAttackerFActionStrenght = 0 /* {
+        didSet {
+            if oldValue < hAttackerFActionStrenght {
+            print("\rSUPER ! Ta puissance d'action a augmentée de \(oldValue) à : \(hAttackerFActionStrenght) ")
+            } else if oldValue > hAttackerFActionStrenght {
+                print("\rDOOOMMAGE ! Ta puissance d'action a été réduite de \(oldValue) à : \(hAttackerFActionStrenght) ")
+            } else {
+                print("\rRIEN NE CHANGE ! Ta puissance d'action reste \(oldValue) à : \(hAttackerFActionStrenght) ")
+            }
+        }
+    }
+    */
     var hAttackerFLifePoint = 0
     
     var hDefenderUserName = ""
