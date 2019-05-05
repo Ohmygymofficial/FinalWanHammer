@@ -182,7 +182,7 @@ func chooseFighter() {
                 chooseFighter()
             }
         }
-        numberOfFighter += 1
+        // numberOfFighter += 1
         print ("\r\rTeam \(userArray[numberOfTeam].teamName) Voici ton tableau de combattants mis à jour :")
         if numberOfTeam == 0 {
             for i in 0...fighterArrayP1.count - 1{
@@ -193,6 +193,7 @@ func chooseFighter() {
                 print("🔵Le \(fighterArrayP2[i].category) : \(fighterArrayP2[i].name)")
             }
         }
+    numberOfFighter += 1
     }
     print("Tu as choisi \(numberOfFighter - 1) fighters")
     numberOfFighter = 1

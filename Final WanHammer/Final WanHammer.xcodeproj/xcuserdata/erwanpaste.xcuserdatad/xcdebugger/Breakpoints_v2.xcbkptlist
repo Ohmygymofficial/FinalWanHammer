@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Final WanHammer/main.swift"
-            timestampString = "578533055.584348"
+            timestampString = "578712913.959163"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
-            landmarkName = "randomFetichNumber(randomInt:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Final WanHammer/main.swift"
-            timestampString = "578533214.04337"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
-            landmarkName = "battleMode()"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "chooseFighter()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
