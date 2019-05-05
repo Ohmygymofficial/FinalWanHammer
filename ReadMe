@@ -6,35 +6,80 @@ First Game with XCODE Swift - Project 3 - OpenClassRoom's
 
 Welcome to the WanHammer Game :
 
+
+WanHammer is a Terminal Battle between 2 teaMs
+Each Team have 3 Fighters
+LifePoint, Strength, Weapon, and Special Attack depend of the fighter's category and a fetich number ! :)
+
+
+Warrior 	: 
+LifePoint 	: 100
+Strenght  	: 10
+Spécial Attack	: Double Attack
+
+
+Dwarf	 	: 
+LifePoint 	: 80
+Strenght  	: 20
+Spécial Attack	: Double Damage
+
+
+Colossus 	: 
+LifePoint 	: 200
+Strenght  	: 5
+Spécial Attack	: Fear (opponent lost his round)
+
+
+Wizard	 	: 
+LifePoint 	: 150
+Strenght (care) : 10
+Spécial Attack	: FireBall ! (Damage 10 on each opponent)
+
+
+
+Also : In WanHammer, there is a random BONUS ZONE : 
+If you're fighter is lucky : He can made a lot of damage in the same round
+If not....He can made a lot of damage on his team !! 
+ 
+
+ENJOY IT ! 
+
+
 Games Rules : 
 
 
 First step : 
 Choose Your :
-- Team Name
 - User Name
-- 4 Fighters (Human, dwarf, magician, Colossus)
-- Favorite Number beetween 1 and 10
+- Team Name
+- 3 Fighters (Human || dwarf || magician || Colossus)
+- Favorite Number beetween 1 and 5
 
 
 Second Step : 
 The Battle !
-- You can check life point of each fighters
-- You can check the last action
-- Sometimes, you can choose a new weapon at the beginning of the round/or you can eat a bigMac/ or a Fruit
+- Have a look on the LifePoint of each teams and Fighters.
+- Have a look on the last action
 - You have to choose which fighter do an action
-- You have to choose which opponent on the action will be done
+
+CHEST ZONE : 
+- Sometimes, you have to change your weapon/care at the beginning of the round
+
+DAMAGE : 
+- You have to choose on which opponent the action will be done
+
+FETICH ZONE : 
+Maybe your fetich number is active ? So The special attack will be executed.
+
 BONUS ZONE : 
-- If you're lucky, you can use your special attack
-- If you're lucky ++  you can use a critical attack 
-- If you're really bad, your CRITICAL ATTACK is missed, and your attack is not on the opponent but on one of your fighter
+If you're fighter is lucky : He can made a lot of damage in the same round
+If not....He can made a lot of damage on his team !! 
 
 
+END OF THE GAME : 
 If your fighter's life point fall to 0 : he's dead 
+When 3 fighter's of one team are dead, the WanHammer is done !
 
-Third Step : When 3 fighter's of one team are dead : 
-- Congrats announcement 
-- Showing the count of round
 
 
 
