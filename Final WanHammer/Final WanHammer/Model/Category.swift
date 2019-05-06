@@ -8,8 +8,7 @@
 
 import Foundation
 
-// We defined here all the different categories possibles of fighters : PLEASE do the same for weapon and specials ;)
-
+// We defined here all the different categories possibles of fighters
 enum Category: String {
     
     case warrior = "Combattant"

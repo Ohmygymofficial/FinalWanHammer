@@ -8,6 +8,7 @@
 
 import Foundation
 
+// We defined here all the different special possibles of fighters
 enum Special: String {
     
     case doubleAttack = "Double Attaque"

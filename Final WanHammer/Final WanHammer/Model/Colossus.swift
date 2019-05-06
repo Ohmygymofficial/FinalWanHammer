@@ -26,11 +26,11 @@ class Colossus : Fighter {
     /**
      specialColossus : Fear for Colossus special attack
      */
-    func specialColossus(randomInt: Int, damageInLoad: Int, resultBonusToPrint: String) {
+    func specialColossus(wichTeam: Int, damageInLoad: Int, resultBonusToPrint: String) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")
-        historyPrint.hAttackerFActionStrenght = choiceAttackFrom(randomInt: randomInt)
-        choiceDefender(randomInt: randomInt, damageInLoad: historyPrint.hAttackerFActionStrenght)
+        historyPrint.hAttackerFActionStrenght = choiceAttackFrom(wichTeam: wichTeam)
+        choiceDefender(wichTeam: wichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
         historyPrint.actionPrint(resultBonusToPrint: "")
         specialFetichAction = false
     }

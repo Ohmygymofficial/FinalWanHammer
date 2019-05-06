@@ -16,6 +16,7 @@ class Team {
     var winCounter = 0
     var looseCounter = 0
     var lifeTeam = 0
+    var symbol = "X"
     
     init(gamerName: String, teamName: String) {
         self.gamerName = gamerName

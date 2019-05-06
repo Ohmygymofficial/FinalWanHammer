@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+// We defined here all the different weapons possibles of fighters
 enum Weapon: String {
     
     case sword = "son épée"
