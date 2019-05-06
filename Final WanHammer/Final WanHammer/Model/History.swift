@@ -67,15 +67,9 @@ class History {
                 + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t a fait \(attackOrCare) sur \(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory)")
         }
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCelui-ci \(gainOrLoose) \(historyPrint.hAttackerFActionStrenght) PV et en possède maintenant \(historyPrint.hDefenderFLifePoint)")
+        if readLine() != nil {
     
-        /*
-        print("\r\t\t\t\t\t\t\t\t\t\t\tVoici la dernière action réalisée :"
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\(hAttackerFName) le \(hAttackerFCategory) a fait son action sur \(hDefenderFName) le \(hDefenderFCategory)"
-            + "\r\t\t\t\t\t\t\t\t\t\t\tIl possède maintenant \(hDefenderFLifePoint) point de vies")
-        print("\r\t\t\t\t\t\t\t\t\t\t\t🔴Score actuel de la team \(hAttackerTeamName) du joueur \(hAttackerUserName) : \(hAttackerLifePoint)")
-        print("\t\t\t\t\t\t\t\t\t\t\t🔵Score actuel de la team \(hDefenderTeamName) du joueur \(hDefenderUserName) : \(hDefenderFLifePoint)")
-    
-         */
+        }
     }
 }
 
