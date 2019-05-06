@@ -8,14 +8,12 @@
 
 import Foundation
 
-class Fighter {
+class Fighter { // Attribute of fighter might change according to characters
     
     var name : String
     var numberFetich : Int
     
-    // Attribute of fighter might change according to characters
-    
-    var category = Category.warrior.rawValue // By default we choose warrior or maybe another one ???
+    var category = Category.warrior.rawValue // By default we choose warrior
     var weapon: String = Weapon.sword.rawValue
     var special: String = Special.doubleAttack.rawValue
     var lifePoint: Int = 100

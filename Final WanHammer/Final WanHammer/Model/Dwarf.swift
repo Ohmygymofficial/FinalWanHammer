@@ -21,6 +21,10 @@ class Dwarf : Fighter {
         self.category = Category.dwarf.rawValue
     }
     
+    
+    /**
+     specialDwarf : Double Damage for Dwarf special attack
+     */
     func specialDwarf() {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre nain est en forme, il affligera double dégâts ce tour-ci !")

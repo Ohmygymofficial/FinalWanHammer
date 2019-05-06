@@ -20,21 +20,45 @@ class Wizard : Fighter {
         self.category = Category.wizard.rawValue
     }
     
-    func specialWizard(randomInt: Int, resultBonusToPrint: String) {
-        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
-            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre magicien envoi une Fireball et enlève 10 points de dommages à toute l'équipe adversaire")
-        if randomInt == 1 { // for the team One
-            for i in 0..<fighterArrayP2.count {
-                print("\(fighterArrayP2[i].name) le \(fighterArrayP2[i].category) se retrouve à \(fighterArrayP2[i].lifePoint - 10)")
-                fighterArrayP1[i].lifePoint -= 10
-            }
-        } else if randomInt == 2 { // for the team 2
-            for i in 0..<fighterArrayP1.count {
-                print("\(fighterArrayP1[i].name) le \(fighterArrayP1[i].category) se retrouve à \(fighterArrayP1[i].lifePoint - 10)")
-                fighterArrayP1[i].lifePoint -= 10
+    
+    /**
+     fireballValueAndDamage : Give 30 / 20 or 10 value to the fireball and the good damage on the fighter's
+     */
+    func fireballValueAndDamage(fighterArray: [Fighter]) {
+        
+        var fireballDamage = 30 // this the power of this fetichTime
+        var counterFireball = 0
+        //take a first loop to check how many fighters are alive
+        for i in 0..<fighterArray.count {
+            if fighterArray[i].lifePoint > 0 {
+                counterFireball += 1
             }
         }
-        historyPrint.actionPrint(resultBonusToPrint: "")
+        fireballDamage = 30 / counterFireball //give a value to fireball 10 20 or 30
+        for i in 0..<fighterArray.count { //aply the damage to the fighters are alive
+            print("\(fighterArray[i].name) le \(fighterArray[i].category) est  à \(fighterArray[i].lifePoint)")
+            if fighterArray[i].lifePoint > 0 {
+                fighterArray[i].lifePoint -= fireballDamage
+                print("\(fireballDamage) points de dommages à \(fighterArray[i].name) le \(fighterArray[i].category). Il se retrouve à \(fighterArray[i].lifePoint)")
+                if fighterArray[i].lifePoint <= 0 { //check if one of them is dead and print it
+                    print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[i].name) le \(fighterArray[i].category) est mort ! 🦴🦴🦴")
+                }
+            }
+        }
+    }
+    
+    
+    /**
+     specialWizard : FireBall for Wizard special attack
+     */
+    func specialWizard(randomInt: Int, resultBonusToPrint: String) {
+        print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
+            + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre magicien envoi une Fireball et enlève :")
+        if randomInt == 1 { // for the team One
+            fireballValueAndDamage(fighterArray: fighterArrayP2)
+        } else if randomInt == 2 { // for the team 2
+            fireballValueAndDamage(fighterArray: fighterArrayP1)
+        }
         specialFetichAction = false
     }
 }

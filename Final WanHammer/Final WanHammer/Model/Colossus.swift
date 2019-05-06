@@ -23,6 +23,9 @@ class Colossus : Fighter {
         self.category = Category.colossus.rawValue
     }
     
+    /**
+     specialColossus : Fear for Colossus special attack
+     */
     func specialColossus(randomInt: Int, damageInLoad: Int, resultBonusToPrint: String) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")

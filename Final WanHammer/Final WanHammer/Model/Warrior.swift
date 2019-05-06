@@ -12,15 +12,20 @@ import Foundation
 class Warrior : Fighter {
     
     
-    override init(name: String, numberFetich: Int) {
+    override init(name: String, numberFetich: Int) { 
         super.init(name: name, numberFetich: numberFetich)
-        self.category = Category.warrior.rawValue
-        self.weapon = Weapon.sword.rawValue
-        self.special = Special.doubleAttack.rawValue
-        self.lifePoint = 100
-        self.strenght = 10
+        /*
+         self.category = Category.warrior.rawValue
+         self.weapon = Weapon.sword.rawValue
+         self.special = Special.doubleAttack.rawValue
+         self.lifePoint = 100
+         self.strenght = 10
+         */
     }
     
+    /**
+     specialWarrior : Double Attack for Warrior special attack
+     */
     func specialWarrior(randomInt: Int, damageInLoad: Int, resultBonusToPrint: String) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque")
