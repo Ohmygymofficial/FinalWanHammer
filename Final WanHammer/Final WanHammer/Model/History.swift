@@ -26,8 +26,6 @@ class History { // This class for print history of the last action
     
     
     
-    
-    
     func actionPrint(resultBonusToPrint: String) {
         
         lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used

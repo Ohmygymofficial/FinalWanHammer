@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Team {
+class Team { // This class to create UserTeam
     
     var gamerName : String
     var teamName : String
@@ -22,6 +22,5 @@ class Team {
         self.gamerName = gamerName
         self.teamName = teamName
     }
-    
 }
 

@@ -427,7 +427,7 @@ func randomChest(wichTeam : Int) {
     let newValueWeaponChestContent = [15,25,30,25,5]
     
     var resultGift = ""
-    let randomNumberChest = Int.random(in: 1..<4)
+    let randomNumberChest = Int.random(in: 1..<5)
     if randomNumberChest == 2 {
         print("\r\rWaooow ! Quelle chance !! Un coffre est apparu devant toi !")
         if !checkCategory  { // if it's Dwarf/Colossus/Warrior : USE weaponChestContent
@@ -702,7 +702,7 @@ func updateHistoryDefenderCare(choiceDefenderLeRetour: Int, damageInLoad: Int, f
  */
 func randomBonus(wichTeam: Int) {
     
-    let randomBonusZone = Int.random(in: 1..<3)
+    let randomBonusZone = Int.random(in: 1..<20)
     let category = historyPrint.hAttackerFCategory
     let userTeam = selectArrayTeamOneOrTwo(wichTeam: wichTeam) // constant for the defender action : Good Array, Good Fighter, depending of which Team and Category
     let userTeamInverted = selectArrayTeamInverted(wichTeam: wichTeam)
@@ -710,7 +710,7 @@ func randomBonus(wichTeam: Int) {
     let defenderArrayInverted = selectArrayFightersOneorTwo(wichTeam: wichTeam)
     
     
-    if randomBonusZone == 2 {  //BONUS ZONE : GOOD ACTION
+    if randomBonusZone == 19 {  //BONUS ZONE : GOOD ACTION
         bonusOrUnluckZone = true // used later for print final result
         var resultBonusToPrint = ""
         let bonusZoneFighter = ["prend confiance et envoit un autre coup puissant au ventre de ","dans son élan d'attaque, ajoute un revers puissant en pleine figure de ","énervé, prend appui sur un arbre, et envoi un coup fatal en pleine gorge de ","utilise son courage pour ajouter une série de 6 coups de tête en plein nez de ","nous fait un coup retourné supplémentaire en plein dos de "]
