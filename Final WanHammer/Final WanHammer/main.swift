@@ -384,32 +384,36 @@ func randomChest(whichTeam : Int) {
     let healthChestContent = ["une purée de brocoli","une barre protéinée","une whey à la banane","une framboise fraiche","un BigMac"]
     let newValueWeaponChestContent = [15,25,30,25,5]
     
-    var resultGift = ""
+    // var resultGift = ""
     let randomNumberChest = Int.random(in: 1..<5)
     if randomNumberChest == 2 {
         print("\r\rWaooow ! Quelle chance !! Un coffre est apparu devant toi !")
         if !checkCategory  { // if it's Dwarf/Colossus/Warrior : USE weaponChestContent
-            let resultGiftNumber = Int(arc4random_uniform(UInt32(weaponChestContent.count)))
-            resultGift = weaponChestContent[resultGiftNumber]
-            let resultStrenght = newValueWeaponChestContent[resultGiftNumber]
-            let fighterArray = selectArrayFightersOneorTwo(whichTeam: whichTeam)
-            updateStrenghtAndWeapon(fighterArray: fighterArray, attackerNumber: attackerNumber, resultStrenght: resultStrenght, resultGift: resultGift)
-            
+            weaponOrHealthInChest(weaponOrHealthArray: weaponChestContent, newValueWeaponChestContent: newValueWeaponChestContent, whichTeam: whichTeam)
         } else if checkCategory { // if it's a wizard : : USE healthChestContent
-            let resultGiftNumber = Int(arc4random_uniform(UInt32(healthChestContent.count)))
-            resultGift = healthChestContent[resultGiftNumber]
-            let resultStrenght = newValueWeaponChestContent[resultGiftNumber]
-            let fighterArray = selectArrayFightersOneorTwo(whichTeam: whichTeam)
-            updateStrenghtAndWeapon(fighterArray: fighterArray, attackerNumber: attackerNumber, resultStrenght: resultStrenght, resultGift: resultGift)
-        }
-        if resultGift != "" {
-            print("C'est \(resultGift) ! Tu t'en équipes !"
-                + "Ta puissance d'action est maintenant de : \(historyPrint.hAttackerFActionStrenght)")
-            if readLine() != nil {}
+            weaponOrHealthInChest(weaponOrHealthArray: healthChestContent, newValueWeaponChestContent: newValueWeaponChestContent, whichTeam: whichTeam)
         }
     }
 }
 
+
+/**
+ weaponOrHealthInChest : To choose good Array : Weapon or Health, depend of category
+ */
+func weaponOrHealthInChest(weaponOrHealthArray: Array<String>, newValueWeaponChestContent: Array<Int>, whichTeam: Int) {
+    
+    var resultGift = ""
+    let resultGiftNumber = Int(arc4random_uniform(UInt32(weaponOrHealthArray.count)))
+    resultGift = weaponOrHealthArray[resultGiftNumber]
+    let resultStrenght = newValueWeaponChestContent[resultGiftNumber]
+    let fighterArray = selectArrayFightersOneorTwo(whichTeam: whichTeam)
+    updateStrenghtAndWeapon(fighterArray: fighterArray, attackerNumber: attackerNumber, resultStrenght: resultStrenght, resultGift: resultGift)
+    if resultGift != "" {
+        print("C'est \(resultGift) ! Tu t'en équipes !"
+            + "Ta puissance d'action est maintenant de : \(historyPrint.hAttackerFActionStrenght)")
+        if readLine() != nil {}
+    }
+}
 
 /**
  updateStrenghtAndWeapon : For update the weapon and Strenght of the good FighterArray with the good GIFT
