@@ -27,16 +27,11 @@ var nAttackAlive = 0
 var revenge = false
 
 
-
-
 // MARK: Array declaration
 var fighterArrayP1 = [Fighter]()   // for the team1
 var fighterArrayP2 = [Fighter]()  // for the team2
 var userArray = [Team]()  //  to archive User's Name / total LifePoint / Round Win and loose
 var arrayGoodIndex = [0,1,2] // this is for keep the good IndexNumber in Menu Defender/Attacker choice.
-
-
-
 
 
 /**
@@ -67,9 +62,6 @@ func principalMenu() {
 }
 
 
-
-
-
 /**
  userInput : Take information about user (gamerName, teamName, FighterCategory & Name ....)
  */
@@ -96,9 +88,6 @@ func userInput() {
 }
 
 
-
-
-
 /**
  pseudoOfGamers : ask pseudo for the gamer
  */
@@ -121,9 +110,6 @@ func pseudoOfGamers() -> String {
 }
 
 
-
-
-
 /**
  teamOfGamers : ask name of the Team
  */
@@ -141,9 +127,6 @@ func teamOfGamers() -> String {
     } while teamofGamerOk == ""
     return teamofGamerOk
 }
-
-
-
 
 
 /**
@@ -210,9 +193,6 @@ func chooseFighter() {
 }
 
 
-
-
-
 /**
  addFighter : In this function : Adding fighter in the good user Array
  */
@@ -241,9 +221,6 @@ func addFighter(category: Category) {
 }
 
 
-
-
-
 /**
  nameOfTheFighter : ask name of each fighter
  */
@@ -260,9 +237,6 @@ func nameOfTheFighter() -> String {
     } while nameOfTheFighterOk == ""
     return nameOfTheFighterOk
 }
-
-
-
 
 
 /**
@@ -289,9 +263,6 @@ func numberFetich() -> Int {
     } while numberTestOk == ""
     return 1
 }
-
-
-
 
 
 /**
@@ -335,9 +306,6 @@ func battleMode() {
 }
 
 
-
-
-
 /**
  choiceAttackFrom : Here we have to choose the Attacker
  */
@@ -377,9 +345,6 @@ func choiceAttackFrom(wichTeam: Int) -> Int {
 }
 
 
-
-
-
 /**
  loopChoiceAttackFrom : Func to print the attacker list with a loop
  */
@@ -396,9 +361,6 @@ func loopChoiceAttackFrom(fighterArray : [Fighter]) {
 }
 
 
-
-
-
 /**
  func UpdateHistoryAttacker : to update History of the last action (Here : var for the Attacker)
  */
@@ -410,9 +372,6 @@ func UpdateHistoryAttacker(choiceAttackerLoop: Int, fighterArray : [Fighter], us
     historyPrint.hAttackerFCategory = fighterArray[choiceAttackerLoop].category
     historyPrint.hAttackerFLifePoint = fighterArray[choiceAttackerLoop].lifePoint
 }
-
-
-
 
 
 /**
@@ -452,9 +411,6 @@ func randomChest(wichTeam : Int) {
 }
 
 
-
-
-
 /**
  updateStrenghtAndWeapon : For update the weapon and Strenght of the good FighterArray with the good GIFT
  */
@@ -465,9 +421,6 @@ func updateStrenghtAndWeapon(fighterArray: [Fighter], attackerNumber: Int, resul
     historyPrint.hAttackerFActionStrenght = fighterArray[attackerNumber].strenght
     fighterArray[attackerNumber].weapon = resultGift
 }
-
-
-
 
 
 /**
@@ -501,9 +454,6 @@ func randomFetichNumber(wichTeam : Int) {
 }
 
 
-
-
-
 /**
  applyFetichBonus : The Dwarf have already apply his double damage if he find FetichNumber...but for the other : We need another function
  */
@@ -525,9 +475,6 @@ func applyFetichBonus(wichTeam : Int) {
         specialFetichAction = false
     }
 }
-
-
-
 
 
 /**
@@ -555,9 +502,6 @@ func healOrAttackFighter(fighterArray: [Fighter], checkCategory: Bool, userTeam:
         }
     }
 }
-
-
-
 
 
 /**
@@ -603,9 +547,6 @@ func choiceDefender(wichTeam: Int, damageInLoad: Int) {
         }
     }
 }
-
-
-
 
 
 /**
@@ -655,9 +596,6 @@ func updateHistoryDefenderDamage(choiceDefenderLeRetour: Int, damageInLoad: Int,
 }
 
 
-
-
-
 /**
  func updateHistoryDefenderCare : to update damage & History of the last WIZARD'S ACTION
  */
@@ -685,9 +623,6 @@ func updateHistoryDefenderCare(choiceDefenderLeRetour: Int, damageInLoad: Int, f
     fighterArray[choiceDefenderLeRetour].lifePoint += historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
     historyPrint.hDefenderFLifePoint = fighterArray[choiceDefenderLeRetour].lifePoint //the others var in History to explain
 }
-
-
-
 
 
 /**
@@ -759,9 +694,6 @@ func randomBonus(wichTeam: Int) {
 }
 
 
-
-
-
 /**
  displayTeamAndFighterLifePoint : To loop on the good Fighter and user Array
  */
@@ -776,9 +708,6 @@ func displayTeamAndFighterLifePoint(userArray: Team, fighterArray : [Fighter], s
 }
 
 
-
-
-
 /**
  checkAllTeamLifePoint : Print the array of the team to check LifePoint of each Fighters
  */
@@ -786,9 +715,6 @@ func checkAllTeamLifePoint() {
     displayTeamAndFighterLifePoint(userArray: userArray[0], fighterArray: fighterArrayP1, symbol: "🔴")
     displayTeamAndFighterLifePoint(userArray: userArray[1], fighterArray: fighterArrayP2, symbol: "🔵")
 }
-
-
-
 
 
 /**
@@ -812,9 +738,6 @@ func lifePointConvert() {
     userArray[1].lifeTeam = fighterArrayP2[0].lifePoint + fighterArrayP2[1].lifePoint + fighterArrayP2[2].lifePoint
     
 }
-
-
-
 
 
 /**
@@ -866,9 +789,6 @@ func demoMode() {
 }
 
 
-
-
-
 /**
  addWinAndLooseValue : At the end of the Game, give +1 to the value Win or Loose for each Team
  */
@@ -890,9 +810,6 @@ func addWinAndLooseValue () {
     if readLine() != nil {
     }
 }
-
-
-
 
 
 /**
@@ -933,9 +850,6 @@ func resetFighters(fighterArray: [Fighter],userArray: Team, symbol: String) {
 }
 
 
-
-
-
 /**
  selectArrayTeamOneOrTwo : If it's Team 1 : Return Array1. If it's team2 : Return Array2
  */
@@ -949,9 +863,6 @@ func selectArrayTeamOneOrTwo(wichTeam : Int) -> Team {
     }
     return userTeamName
 }
-
-
-
 
 
 /**
@@ -969,8 +880,6 @@ func selectArrayTeamInverted(wichTeam : Int) -> Team {
 }
 
 
-
-
 /**
  selectArrayFightersOneorTwo : If it's Team 1 : Return FighterP1. If it's team2 : Return FighterP2
  */
@@ -985,9 +894,6 @@ func selectArrayFightersOneorTwo(wichTeam : Int) -> [Fighter] {
 }
 
 
-
-
-
 /**
  selectArrayDefenderOneorTwo : If it's Team 1 : Return FighterP2. If it's team2 : Return FighterP1
  */
@@ -1000,8 +906,6 @@ func selectArrayDefenderOneorTwo(wichTeam : Int) -> [Fighter] {
     }
     return defenderArray
 }
-
-
 
 
 
