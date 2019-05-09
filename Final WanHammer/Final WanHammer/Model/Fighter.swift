@@ -23,4 +23,6 @@ class Fighter { // Attribute of fighter might change according to characters
         self.name = name
         self.numberFetich = numberFetich
     }
+    
+    func specialAttack(_ wichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {}
 }

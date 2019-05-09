@@ -11,13 +11,17 @@ import Foundation
 
 class Warrior : Fighter {
     
+    
+    
     /**
      specialWarrior : Double Attack for Warrior special attack
      */
-    func specialWarrior(wichTeam: Int, damageInLoad: Int, resultBonusToPrint: String) {
+    override func specialAttack(_ wichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque")
+        if let wichTeam = wichTeam {
         choiceDefender(wichTeam: wichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
+        }
         specialFetichAction = false
         historyPrint.actionPrint(resultBonusToPrint: "")
     }
