@@ -25,7 +25,7 @@ class Dwarf : Fighter {
     /**
      specialDwarf : Double Damage for Dwarf special attack
      */
-    override func specialAttack(_ wichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {
+    override func specialAttack(_ whichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre nain est en forme, il affligera double dégâts ce tour-ci !")
         historyPrint.hAttackerFActionStrenght +=  historyPrint.hAttackerFActionStrenght

@@ -24,12 +24,12 @@ class Wizard : Fighter {
     /**
      specialWizard : FireBall for Wizard special attack
      */
-    override func specialAttack(_ wichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {
+    override func specialAttack(_ whichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre magicien envoi une Fireball et enlève :")
-        if wichTeam == 1 { // for the team One
+        if whichTeam == 1 { // for the team One
             fireballValueAndDamage(fighterArray: fighterArrayP2)
-        } else if wichTeam == 2 { // for the team 2
+        } else if whichTeam == 2 { // for the team 2
             fireballValueAndDamage(fighterArray: fighterArrayP1)
         }
         specialFetichAction = false

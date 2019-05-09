@@ -26,12 +26,12 @@ class Colossus : Fighter {
     /**
      specialColossus : Fear for Colossus special attack
      */
-    override func specialAttack(_ wichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {
+    override func specialAttack(_ whichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")
-        if let wichTeam = wichTeam {
-            historyPrint.hAttackerFActionStrenght = choiceAttackFrom(wichTeam: wichTeam)
-            choiceDefender(wichTeam: wichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
+        if let whichTeam = whichTeam {
+            historyPrint.hAttackerFActionStrenght = choiceAttackFrom(whichTeam: whichTeam)
+            choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
         }
         historyPrint.actionPrint(resultBonusToPrint: "")
         specialFetichAction = false
