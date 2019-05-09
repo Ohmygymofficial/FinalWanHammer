@@ -509,24 +509,19 @@ func randomFetichNumber(wichTeam : Int) {
  */
 func applyFetichBonus(wichTeam : Int) {
     
-    //SPECIAL FETICH for the Warrior : Double Attack, so launch second attack after firstDamage
-    if specialFetichAction,  historyPrint.hAttackerFCategory == Category.warrior.rawValue {
-        let specialInLoad = Warrior(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
-        specialInLoad.specialWarrior(wichTeam: wichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght, resultBonusToPrint: "")
-        specialFetichAction = false
-    }
-    
-    // SPECIAL FETICH for the Colossus : entiere Double Turn
-    if specialFetichAction,  historyPrint.hAttackerFCategory == Category.colossus.rawValue {
-        let specialInLoad = Colossus(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
-        specialInLoad.specialAttack(wichTeam, historyPrint.hAttackerFActionStrenght, "")
-        specialFetichAction = false
-    }
-    
-    // SPECIAL FETICH for the Magician : Loop damage for all the opponent lifePoint Array
-    if specialFetichAction,  historyPrint.hAttackerFCategory == Category.wizard.rawValue {
-        let specialInLoad = Wizard(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
-        specialInLoad.specialWizard(wichTeam: wichTeam, resultBonusToPrint: "")
+    if specialFetichAction {
+        if historyPrint.hAttackerFCategory == Category.warrior.rawValue { //SPECIAL FETICH for the Warrior : Double Attack, so launch second attack after firstDamage
+            let specialInLoad = Warrior(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+            specialInLoad.specialAttack(wichTeam, historyPrint.hAttackerFActionStrenght, "")
+        }
+        if historyPrint.hAttackerFCategory == Category.colossus.rawValue { // SPECIAL FETICH for the Colossus : entiere Double Turn
+            let specialInLoad = Colossus(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+            specialInLoad.specialAttack(wichTeam, historyPrint.hAttackerFActionStrenght, "")
+        }
+        if historyPrint.hAttackerFCategory == Category.wizard.rawValue { // SPECIAL FETICH for the Magician : Loop damage for all the opponent lifePoint Array
+            let specialInLoad = Wizard(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+            specialInLoad.specialAttack(wichTeam, historyPrint.hAttackerFActionStrenght, "")
+        }
         specialFetichAction = false
     }
 }
