@@ -11,7 +11,14 @@ import Foundation
 
 class Warrior : Fighter {
     
-    
+    override init(name: String, numberFetich: Int) {
+        super.init(name: name, numberFetich: numberFetich)
+        self.weapon = weapon
+        self.special = special
+        self.lifePoint = lifePoint
+        self.strenght = strenght
+        self.category = category
+    }
     
     /**
      specialWarrior : Double Attack for Warrior special attack
@@ -20,9 +27,9 @@ class Warrior : Fighter {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque")
         if let whichTeam = whichTeam {
-        choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
+        wanHammer.choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
         }
-        specialFetichAction = false
+        wanHammer.specialFetichAction = false
         historyPrint.actionPrint(resultBonusToPrint: "")
     }
 }

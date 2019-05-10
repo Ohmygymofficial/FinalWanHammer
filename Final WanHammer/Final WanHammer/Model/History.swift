@@ -28,10 +28,10 @@ class History { // This class for print history of the last action
     
     func actionPrint(resultBonusToPrint: String) {
         
-        lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used
+        wanHammer.lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used
         var attackOrCare = ""
         var gainOrLoose = ""
-        if checkCategory {  // take a var to print different word (depend of category : Wizard or no)
+        if wanHammer.checkCategory {  // take a var to print different word (depend of category : Wizard or no)
             attackOrCare = "un soin"
             gainOrLoose = "reçoit"
         } else {
@@ -39,7 +39,7 @@ class History { // This class for print history of the last action
             gainOrLoose = "perd"
         }
         
-        if bonusOrUnluckZone == true || fromUnluckZone == true { // if fighter came from bonus zone, print different message
+        if wanHammer.bonusOrUnluckZone == true || wanHammer.fromUnluckZone == true { // if fighter came from bonus zone, print different message
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
             if historyPrint.hAttackerFName == historyPrint.hDefenderFName {
                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t....lui même ^^' !!")
@@ -52,9 +52,7 @@ class History { // This class for print history of the last action
                 + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t a fait \(attackOrCare) sur \(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory)")
         }
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCelui-ci \(gainOrLoose) \(historyPrint.hAttackerFActionStrenght) PV et en possède maintenant \(historyPrint.hDefenderFLifePoint)")  // This is the commun message
-        if readLine() != nil {
-            
-        }
+        Message.pause()
     }
 }
 

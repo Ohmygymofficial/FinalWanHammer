@@ -28,11 +28,11 @@ class Wizard : Fighter {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre magicien envoi une Fireball et enlève :")
         if whichTeam == 1 { // for the team One
-            fireballValueAndDamage(fighterArray: fighterArrayP2)
+            fireballValueAndDamage(fighterArray: wanHammer.fighterArrayP2)
         } else if whichTeam == 2 { // for the team 2
-            fireballValueAndDamage(fighterArray: fighterArrayP1)
+            fireballValueAndDamage(fighterArray: wanHammer.fighterArrayP1)
         }
-        specialFetichAction = false
+        wanHammer.specialFetichAction = false
     }
     
     
