@@ -41,12 +41,13 @@ class History { // This class for print history of the last action
     /**
      func updateHistoryDefenderDamage : to update damage & History of the last FIGHTER'S ACTION
      */
-    func updateHistoryDefenderDamage(choiceDefenderLeRetour: Int, damageInLoad: Int, fighterArray: [Fighter], userTeamName: String) {
+    func updateHistoryDefenderDamage(iDefender: Int, damageInLoad: Int, fighterArray: [Fighter], userTeamName: String) {
         
+        // HERE CAN REFACTOR CODE   Situations are similar
         var alreadyDead = false
         var defenderRandomNumber = 0
         
-        if wanHammer.fromUnluckZone { // if this action come from UNLUCK ZONE, damage will be activate for random alive Fighter in the opponent Array
+        if geek.fromUnluckZone { // if this action come from UNLUCK ZONE, damage will be activate for random alive Fighter in the opponent Array
             repeat {
                 defenderRandomNumber = Int(arc4random_uniform(UInt32(fighterArray.count)))
                 if fighterArray[defenderRandomNumber].lifePoint > 0 {
@@ -64,22 +65,21 @@ class History { // This class for print history of the last action
         }
         
         
-        
         // if the opponent is already dead with the previous attack : print a message
-        if fighterArray[choiceDefenderLeRetour].lifePoint <= 0 {
+        if fighterArray[iDefender].lifePoint <= 0 {
             alreadyDead = true
         }
         
         historyPrint.hDefenderTeamName = userTeamName
-        historyPrint.hDefenderFName = fighterArray[choiceDefenderLeRetour].name
-        historyPrint.hDefenderFCategory = fighterArray[choiceDefenderLeRetour].category
-        fighterArray[choiceDefenderLeRetour].lifePoint -= historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
-        historyPrint.hDefenderFLifePoint = fighterArray[choiceDefenderLeRetour].lifePoint //the others var in History to explain
-        if fighterArray[choiceDefenderLeRetour].lifePoint <= 0 {
+        historyPrint.hDefenderFName = fighterArray[iDefender].name
+        historyPrint.hDefenderFCategory = fighterArray[iDefender].category
+        fighterArray[iDefender].lifePoint -= historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
+        historyPrint.hDefenderFLifePoint = fighterArray[iDefender].lifePoint //the others var in History to explain
+        if fighterArray[iDefender].lifePoint <= 0 {
             if alreadyDead {
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 IL S'ACHAAAAAAARNE : \(fighterArray[choiceDefenderLeRetour].name) le \(fighterArray[choiceDefenderLeRetour].category) est déjà mort...au sol ! 🦴🦴🦴 Mais pourtant : ")
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 IL S'ACHAAAAAAARNE : \(fighterArray[iDefender].name) le \(fighterArray[iDefender].category) est déjà mort...au sol ! 🦴🦴🦴 Mais pourtant : ")
             } else {
-                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[choiceDefenderLeRetour].name) le \(fighterArray[choiceDefenderLeRetour].category) est mort ! 🦴🦴🦴")
+                print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[iDefender].name) le \(fighterArray[iDefender].category) est mort ! 🦴🦴🦴")
             }
         }
     }
@@ -89,11 +89,11 @@ class History { // This class for print history of the last action
      func updateHistoryDefenderCare : to update damage & History of the last WIZARD'S ACTION
      */
     
-    func updateHistoryDefenderCare(choiceDefenderLeRetour: Int, damageInLoad: Int, fighterArray: [Fighter], userTeamName: String) {
+    func updateHistoryDefenderCare(iDefender: Int, damageInLoad: Int, fighterArray: [Fighter], userTeamName: String) {
         
         var defenderRandomNumber = 0
         
-        if wanHammer.fromUnluckZone { // if this action come from UNLUCK ZONE, damage will be activate for random alive Fighter in the opponent Array
+        if geek.fromUnluckZone { // if this action come from UNLUCK ZONE, damage will be activate for random alive Fighter in the opponent Array
             repeat {
                 defenderRandomNumber = Int(arc4random_uniform(UInt32(fighterArray.count)))
                 if fighterArray[defenderRandomNumber].lifePoint > 0 {
@@ -107,10 +107,10 @@ class History { // This class for print history of the last action
             return print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPas de chance !")
         }
         historyPrint.hDefenderTeamName = userTeamName
-        historyPrint.hDefenderFName = fighterArray[choiceDefenderLeRetour].name
-        historyPrint.hDefenderFCategory =  fighterArray[choiceDefenderLeRetour].category
-        fighterArray[choiceDefenderLeRetour].lifePoint += historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
-        historyPrint.hDefenderFLifePoint = fighterArray[choiceDefenderLeRetour].lifePoint //the others var in History to explain
+        historyPrint.hDefenderFName = fighterArray[iDefender].name
+        historyPrint.hDefenderFCategory =  fighterArray[iDefender].category
+        fighterArray[iDefender].lifePoint += historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
+        historyPrint.hDefenderFLifePoint = fighterArray[iDefender].lifePoint //the others var in History to explain
     }
     
     
@@ -132,43 +132,22 @@ class History { // This class for print history of the last action
      checkAllTeamLifePoint : Print the array of the team to check LifePoint of each Fighters
      */
     static func checkAllTeamLifePoint() {
-        displayTeamAndFighterLifePoint(userArray: wanHammer.userArray[0], fighterArray: wanHammer.fighterArrayP1, symbol: "🔴")
-        displayTeamAndFighterLifePoint(userArray: wanHammer.userArray[1], fighterArray: wanHammer.fighterArrayP2, symbol: "🔵")
+        displayTeamAndFighterLifePoint(userArray: geek.userArray[0], fighterArray: geek.fighterArrayP1, symbol: "🔴")
+        displayTeamAndFighterLifePoint(userArray: geek.userArray[1], fighterArray: geek.fighterArrayP2, symbol: "🔵")
     }
     
     
-    /**
-     lifePointConvert : To convert negative lifePoint to 0 and can have good addition in the final result
-     */
-    static func lifePointConvert() {
-        
-        //to reset negative count to 0 and don't have error in addition mode
-        for n in 0..<wanHammer.fighterArrayP1.count {
-            if wanHammer.fighterArrayP1[n].lifePoint < 0 {
-                wanHammer.fighterArrayP1[n].lifePoint = 0
-            }
-        }
-        for n in 0..<wanHammer.fighterArrayP2.count {
-            if wanHammer.fighterArrayP2[n].lifePoint < 0 {
-                wanHammer.fighterArrayP2[n].lifePoint = 0
-            }
-        }
-        // update userArray Life Team
-        wanHammer.userArray[0].lifeTeam = wanHammer.fighterArrayP1[0].lifePoint + wanHammer.fighterArrayP1[1].lifePoint + wanHammer.fighterArrayP1[2].lifePoint
-        wanHammer.userArray[1].lifeTeam = wanHammer.fighterArrayP2[0].lifePoint + wanHammer.fighterArrayP2[1].lifePoint + wanHammer.fighterArrayP2[2].lifePoint
-        
-    }
     
     
     /**
      actionPrint : To print result of the last action (depend of : Normal Action, Fetich Action, Bonus Action)
-    */
+     */
     static func actionPrint(resultBonusToPrint: String) {
         
-        History.lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used
+        Team.lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used
         var attackOrCare = ""
         var gainOrLoose = ""
-        if wanHammer.checkCategory {  // take a var to print different word (depend of category : Wizard or no)
+        if geek.checkCategory {  // take a var to print different word (depend of category : Wizard or no)
             attackOrCare = "un soin"
             gainOrLoose = "reçoit"
         } else {
@@ -176,7 +155,7 @@ class History { // This class for print history of the last action
             gainOrLoose = "perd"
         }
         
-        if wanHammer.bonusOrUnluckZone == true || wanHammer.fromUnluckZone == true { // if fighter came from bonus zone, print different message
+        if geek.bonusOrUnluckZone == true || geek.fromUnluckZone == true { // if fighter came from bonus zone, print different message
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre \(historyPrint.hAttackerFCategory) \(historyPrint.hAttackerFName) \(resultBonusToPrint) ")
             if historyPrint.hAttackerFName == historyPrint.hDefenderFName {
                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t....lui même ^^' !!")

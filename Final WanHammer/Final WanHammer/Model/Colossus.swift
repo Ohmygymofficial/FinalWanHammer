@@ -30,10 +30,10 @@ class Colossus : Fighter {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre Colosse a fait peur a vos adversaires, vous avez droit à un deuxième tour")
         if let whichTeam = whichTeam {
-            historyPrint.hAttackerFActionStrenght = wanHammer.choiceAttackFrom(whichTeam: whichTeam)
-            wanHammer.choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
+            historyPrint.hAttackerFActionStrenght = geek.choiceAttackFrom(whichTeam: whichTeam)
+            geek.choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
         }
         History.actionPrint(resultBonusToPrint: "")
-        wanHammer.specialFetichAction = false
+        geek.specialFetichAction = false
     }
 }

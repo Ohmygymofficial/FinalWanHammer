@@ -27,9 +27,9 @@ class Warrior : Fighter {
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😇😇😇😇 FETICH TIME 😇😇😇😇"
             + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tVotre combattant possède une deuxième attaque")
         if let whichTeam = whichTeam {
-        wanHammer.choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
+            geek.choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
         }
-        wanHammer.specialFetichAction = false
+        geek.specialFetichAction = false
         History.actionPrint(resultBonusToPrint: "")
     }
 }

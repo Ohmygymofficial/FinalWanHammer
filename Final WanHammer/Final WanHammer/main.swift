@@ -8,8 +8,8 @@
 
 import Foundation
 
-let wanHammer = WanHammerGame()
+let geek = WanHammerGame()
 let historyPrint = History()
 
-wanHammer.InTheGame()
+geek.InTheGame()
 History.thanksAtTheEnd()

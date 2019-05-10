@@ -20,7 +20,6 @@ enum Weapon: String {
     /**
      updateStrenghtAndWeapon : For update the weapon and Strenght of the good FighterArray with the good GIFT
      */
-    
     static func updateStrenghtAndWeapon(fighterArray: [Fighter], attackerNumber: Int, resultStrenght: Int, resultGift: String) {
         
         fighterArray[attackerNumber].strenght = resultStrenght
