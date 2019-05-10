@@ -25,7 +25,9 @@ class Fighter { // Attribute of fighter might change according to characters
     }
     
     
-    
+    /**
+     specialAttack : Nothing of mother Class
+     */
     func specialAttack(_ whichTeam: Int?, _ damageInLoad: Int?, _ resultBonusToPrint: String?) {}
     
     
@@ -74,6 +76,129 @@ class Fighter { // Attribute of fighter might change according to characters
     
     
     /**
+     randomFetichNumber : Check random Fetich number : If it's ok : resultFetich Bool become true and special action will be proposed
+     */
+    static func randomFetichNumber(whichTeam : Int) {
+        
+        var fetichOk = false
+        let randomFetichNumber = Int.random(in: 1..<6)
+        let fighterArray = Tools.selectArrayFightersOneorTwo(whichTeam: whichTeam)
+        if randomFetichNumber == fighterArray[geek.attackerNumber].numberFetich {
+            fetichOk = true
+        }
+        
+        if fetichOk {
+            switch historyPrint.hAttackerFCategory {
+            case Category.warrior.rawValue:
+                geek.specialFetichAction = true
+            case Category.dwarf.rawValue:
+                let specialInLoad = Dwarf(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+                specialInLoad.specialAttack(whichTeam, historyPrint.hAttackerFActionStrenght, "")
+                geek.specialFetichAction = false
+            case Category.colossus.rawValue:
+                geek.specialFetichAction = true
+            case Category.wizard.rawValue:
+                geek.specialFetichAction = true
+            default:
+                print("Pas d'action Fétiche ce tour ci ^^") //never happen. Have to keep it because SWITCH is on the current Attacker var
+            }
+        }
+    }
+    
+    
+    /**
+     applyFetichBonus : The Dwarf have already apply his double damage if he find FetichNumber...but for the other : We need another function
+     */
+    static func applyFetichBonus(whichTeam : Int) {
+        
+        if geek.specialFetichAction {
+            if historyPrint.hAttackerFCategory == Category.warrior.rawValue { //SPECIAL FETICH for the Warrior : Double Attack, so launch second attack after firstDamage
+                let specialInLoad = Warrior(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+                specialInLoad.specialAttack(whichTeam, historyPrint.hAttackerFActionStrenght, "")
+            }
+            if historyPrint.hAttackerFCategory == Category.colossus.rawValue { // SPECIAL FETICH for the Colossus : entiere Double Turn
+                let specialInLoad = Colossus(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+                specialInLoad.specialAttack(whichTeam, historyPrint.hAttackerFActionStrenght, "")
+            }
+            if historyPrint.hAttackerFCategory == Category.wizard.rawValue { // SPECIAL FETICH for the Magician : Loop damage for all the opponent lifePoint Array
+                let specialInLoad = Wizard(name: (historyPrint.hAttackerFName), numberFetich: historyPrint.hAttackerLifePoint)
+                specialInLoad.specialAttack(whichTeam, historyPrint.hAttackerFActionStrenght, "")
+            }
+            geek.specialFetichAction = false
+        }
+    }
+    
+    
+    /**
+     randomBONUS : Random BONUS (depend of Wizard or no)
+     */
+    static func randomBonus(whichTeam: Int) {
+        
+        let randomBonusZone = Int.random(in: 1..<20)
+        let category = historyPrint.hAttackerFCategory
+        let userTeam = Tools.selectArrayTeamOneOrTwo(whichTeam: whichTeam) // constant for the defender action : Good Array, Good Fighter, depending of which Team and Category
+        let userTeamInverted = Tools.selectArrayTeamInverted(whichTeam: whichTeam)
+        let defenderArray = Tools.selectArrayDefenderOneorTwo(whichTeam: whichTeam)
+        let defenderArrayInverted = Tools.selectArrayFightersOneorTwo(whichTeam: whichTeam)
+        
+        
+        if randomBonusZone == 19 {  //BONUS ZONE : GOOD ACTION
+            geek.bonusOrUnluckZone = true // used later for print final result
+            var resultBonusToPrint = ""
+            let bonusZoneFighter = ["prend confiance et envoit un autre coup puissant au ventre de ","dans son élan d'attaque, ajoute un revers puissant en pleine figure de ","énervé, prend appui sur un arbre, et envoi un coup fatal en pleine gorge de ","utilise son courage pour ajouter une série de 6 coups de tête en plein nez de ","nous fait un coup retourné supplémentaire en plein dos de "]
+            let instantDamageValue = [50,60,90,60,50]
+            let bonusZoneWizard = ["rassemble sa concentration et arrive à ajouter un sort de soin puissant pour ","ajoute 2 mouvements spéciaux et envoi un soin pour ","utilise sa dernière formule ! Un soin puissant est invoqué pour "]
+            let instantCareValue = [50,60,90]
+            switch category {
+            case "Combattant", "Nain", "Colosse":
+                let resultNumberBonus = Int(arc4random_uniform(UInt32(bonusZoneFighter.count)))
+                resultBonusToPrint = bonusZoneFighter[resultNumberBonus]
+                historyPrint.hAttackerFActionStrenght = instantDamageValue[resultNumberBonus]
+                historyPrint.updateHistoryDefenderDamage(iDefender: geek.defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: defenderArray, userTeamName: userTeamInverted.teamName)
+            case "Magicien":
+                let resultNumberBonus = Int(arc4random_uniform(UInt32(bonusZoneWizard.count)))
+                resultBonusToPrint = bonusZoneWizard[resultNumberBonus]
+                historyPrint.hAttackerFActionStrenght = instantCareValue[resultNumberBonus]
+                historyPrint.updateHistoryDefenderCare(iDefender: geek.defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: defenderArrayInverted, userTeamName: userTeam.teamName)
+            default:
+                print("Pas d'action BONUS ce tour ci ^^")
+            }
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😎😎😎😎  BONUS ZONE  😎😎😎😎")
+            historyPrint.actionPrint(resultBonusToPrint: resultBonusToPrint)
+            geek.bonusOrUnluckZone = false
+        }
+        
+        
+        if randomBonusZone == 1 { //UNLUCK ZONE
+            geek.fromUnluckZone = true
+            var resultBonusToPrint = ""
+            let unluckyZoneFighter = ["prend confiance et envoit un autre coup puissant .... mais il glisse et crée une blessure au ventre sur ","dans son élan d'attaque, ajoute un revers puissant..mais il manque son coup et crée une blessure au bras sur ","énervé, prend appui sur un arbre, pour envoyer un coup fatal en pleine gorge...mais l'arbre est glissant, il rate son attaque et crée une profonde blessure sur ","utilise son courage pour ajouter des coups de tête...mais désorienté, il crée des blessures sur ","nous fait un coup retourné supplémentaire ...son arme lui glisse des mains et il crée une entaille sur "]
+            let instantDamageValue = [50,60,90,60,50]
+            let unluckyZoneWizard = ["rassemble sa concentration pour lancer un soin puissant...mais il est déconcentré et son soin est envoyé sur ","ajoute 2 mouvements spéciaux pour soigner encore ! Mouvements râtés....les soins arrivent sur ","utilise sa dernière formule ! Un soin puissant est invoqué! Mais la formule est pas la bonne... et elle soigne "]
+            let instantCareValue = [50,60,90]
+            
+            switch category {
+            case "Combattant", "Nain", "Colosse":
+                let resultNumberBonus = Int(arc4random_uniform(UInt32(unluckyZoneFighter.count)))
+                resultBonusToPrint = unluckyZoneFighter[resultNumberBonus]
+                historyPrint.hAttackerFActionStrenght = instantDamageValue[resultNumberBonus]
+                historyPrint.updateHistoryDefenderDamage(iDefender: geek.defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: defenderArrayInverted, userTeamName: userTeam.teamName)
+            case "Magicien":
+                let resultNumberBonus = Int(arc4random_uniform(UInt32(unluckyZoneWizard.count)))
+                resultBonusToPrint = unluckyZoneWizard[resultNumberBonus]
+                historyPrint.hAttackerFActionStrenght = instantCareValue[resultNumberBonus]
+                historyPrint.updateHistoryDefenderCare(iDefender: geek.defenderNumber, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: defenderArray, userTeamName: userTeamInverted.teamName)
+            default:
+                print("Pas d'action BONUS ce tour ci ^^")
+            }
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t😩😩😩😩  UNLUCK ZONE  😩😩😩😩")
+            historyPrint.actionPrint(resultBonusToPrint: resultBonusToPrint)
+            geek.fromUnluckZone = false
+        }
+    }
+    
+    
+    /**
      FightersSettings : To print the caracteristic of the Fighters
      */
     static func FightersSettings() {
@@ -101,19 +226,15 @@ class Fighter { // Attribute of fighter might change according to characters
         }
     }
     
-    
     /**
-     updateStrenghtAndWeapon : For update the weapon and Strenght of the good FighterArray with the good GIFT
+     isDead : To check if the fighter is dead and change var alreadyDead
      */
-    func updateStrenghtAndWeapon(fighterArray: [Fighter], attackerNumber: Int, resultStrenght: Int, resultGift: String) {
-        
-        self.strenght = resultStrenght
-        self.weapon = resultGift
-        
-        fighterArray[attackerNumber].strenght = resultStrenght
-        historyPrint.hAttackerFActionStrenght = fighterArray[attackerNumber].strenght
-        fighterArray[attackerNumber].weapon = resultGift
+    static func isDead(i : Int, fighterArray: [Fighter]) {
+        if fighterArray[i].lifePoint <= 0 { //check if one of them is dead and print it
+            print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[i].name) le \(fighterArray[i].category) est mort ! 🦴🦴🦴")
+        }
     }
+    
     
     /**
      resetFighters : Function to reset All the parameters of each Fighters on each teams

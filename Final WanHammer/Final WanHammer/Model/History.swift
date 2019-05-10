@@ -16,7 +16,7 @@ class History { // This class for print history of the last action
     var hAttackerFCategory = ""
     var hAttackerFActionStrenght = 0
     var hAttackerFLifePoint = 0
-    
+
     var hDefenderUserName = ""
     var hDefenderTeamName = ""
     var hDefenderLifePoint = 0
@@ -42,22 +42,23 @@ class History { // This class for print history of the last action
      func updateHistoryDefenderDamage : to update damage & History of the last FIGHTER'S ACTION
      */
     func updateHistoryDefenderDamage(iDefender: Int, damageInLoad: Int, fighterArray: [Fighter], userTeamName: String) {
-        
         // HERE CAN REFACTOR CODE   Situations are similar
         var alreadyDead = false
         var defenderRandomNumber = 0
         
-        if geek.fromUnluckZone { // if this action come from UNLUCK ZONE, damage will be activate for random alive Fighter in the opponent Array
+        if geek.fromUnluckZone { // if this action come from UNLUCK ZONE, damage will be activate for random alive Friend
             repeat {
                 defenderRandomNumber = Int(arc4random_uniform(UInt32(fighterArray.count)))
-                if fighterArray[defenderRandomNumber].lifePoint > 0 {
+                if fighterArray[defenderRandomNumber].lifePoint > 0 { //
                     historyPrint.hDefenderTeamName = userTeamName
                     historyPrint.hDefenderFName = fighterArray[defenderRandomNumber].name
                     historyPrint.hDefenderFCategory = fighterArray[defenderRandomNumber].category
                     fighterArray[defenderRandomNumber].lifePoint -= historyPrint.hAttackerFActionStrenght //update LifePoint in FighterArray
                     historyPrint.hDefenderFLifePoint = fighterArray[defenderRandomNumber].lifePoint //the others var in History to explain
                     if fighterArray[defenderRandomNumber].lifePoint <= 0 { // situation if The attacker dead HimSelf...have to go out of this loop
-                        return print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[defenderRandomNumber].name) le \(fighterArray[defenderRandomNumber].category) est mort ! 🦴🦴🦴")
+                        return Fighter.isDead(i: defenderRandomNumber, fighterArray: fighterArray)
+                        /* print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[defenderRandomNumber].name) le \(fighterArray[defenderRandomNumber].category) est mort ! 🦴🦴🦴")
+                            */
                     }
                 }
             }  while fighterArray[defenderRandomNumber].lifePoint <= 0
@@ -79,7 +80,10 @@ class History { // This class for print history of the last action
             if alreadyDead {
                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 IL S'ACHAAAAAAARNE : \(fighterArray[iDefender].name) le \(fighterArray[iDefender].category) est déjà mort...au sol ! 🦴🦴🦴 Mais pourtant : ")
             } else {
+                Fighter.isDead(i: iDefender, fighterArray: fighterArray)
+                /*
                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t🦴🦴🦴 WOWWWW LE WANHAMMER SE REDUIT : \(fighterArray[iDefender].name) le \(fighterArray[iDefender].category) est mort ! 🦴🦴🦴")
+                */
             }
         }
     }
@@ -93,7 +97,7 @@ class History { // This class for print history of the last action
         
         var defenderRandomNumber = 0
         
-        if geek.fromUnluckZone { // if this action come from UNLUCK ZONE, damage will be activate for random alive Fighter in the opponent Array
+        if geek.fromUnluckZone { // if this action come from UNLUCK ZONE, care will be activate for random alive Fighter in the opponent Array
             repeat {
                 defenderRandomNumber = Int(arc4random_uniform(UInt32(fighterArray.count)))
                 if fighterArray[defenderRandomNumber].lifePoint > 0 {
@@ -142,11 +146,12 @@ class History { // This class for print history of the last action
     /**
      actionPrint : To print result of the last action (depend of : Normal Action, Fetich Action, Bonus Action)
      */
-    static func actionPrint(resultBonusToPrint: String) {
+    func actionPrint(resultBonusToPrint: String) {
         
         Team.lifePointConvert() // if BONUS OR UNLUCKY ZONE has been used
         var attackOrCare = ""
         var gainOrLoose = ""
+        var whoReceive = ""
         if geek.checkCategory {  // take a var to print different word (depend of category : Wizard or no)
             attackOrCare = "un soin"
             gainOrLoose = "reçoit"
@@ -162,10 +167,15 @@ class History { // This class for print history of the last action
             } else {
                 print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory) !!")
             }
-        } else { 
+        } else {
+            if historyPrint.hDefenderFName == historyPrint.hAttackerFName {
+                whoReceive = "lui même"
+            } else {
+                whoReceive = "\(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory)"
+            }
             print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Voici l'historique de l'action réalisée : "
                 + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Action Classique : \(historyPrint.hAttackerFName) le \(historyPrint.hAttackerFCategory)"
-                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t a fait \(attackOrCare) sur \(historyPrint.hDefenderFName) le \(historyPrint.hDefenderFCategory)")
+                + "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t a fait \(attackOrCare) sur \(whoReceive)")
         }
         print("\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCelui-ci \(gainOrLoose) \(historyPrint.hAttackerFActionStrenght) PV et en possède maintenant \(historyPrint.hDefenderFLifePoint)")  // This is the commun message
         UserSetting.pause()
@@ -173,9 +183,19 @@ class History { // This class for print history of the last action
     
     
     /**
+     battleIsFinishPrint : A team is dead, print score
+     */
+    func battleIsFinishPrint() {
+        print("La partie est terminée :")
+        print("🔴Score final de la team \(geek.userArray[0].teamName) du joueur \(geek.userArray[0].gamerName) : \(geek.fighterArrayP1[0].lifePoint + geek.fighterArrayP1[1].lifePoint + geek.fighterArrayP1[2].lifePoint)")
+        print("🔵Score final de la team \(geek.userArray[1].teamName) du joueur \(geek.userArray[1].gamerName) : \(geek.fighterArrayP2[0].lifePoint + geek.fighterArrayP2[1].lifePoint + geek.fighterArrayP2[2].lifePoint)")
+    }
+    
+    
+    /**
      thanksAtTheEnd : End Message
      */
-    static func thanksAtTheEnd() {
+    func thanksAtTheEnd() {
         print("Merci ! J'espère que vous avez trouvé ça divertissant ^^")
     }
 }

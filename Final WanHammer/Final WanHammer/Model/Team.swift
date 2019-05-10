@@ -154,6 +154,126 @@ class Team { // This class to create UserTeam
     }
     
     
+    /**
+     choiceAttackFrom : Here we have to choose the Attacker
+     */
+    static func choiceAttackFrom(whichTeam: Int) -> Int {
+        
+        geek.nAttackAlive = 0 // reset to check good choice while fighters were dead
+        let userTeamName = Tools.selectArrayTeamOneOrTwo(whichTeam: whichTeam) //take the good UserArray for the function
+        let fighterArray = Tools.selectArrayFightersOneorTwo(whichTeam: whichTeam) //take the good FighterArray for the function
+        print("\r\r\r\(userTeamName.symbol) \(userTeamName.gamerName) de la Team \(userTeamName.teamName) : Il te reste \(userTeamName.lifeTeam) PV"
+            + "\r Avec quel Fighter désires-tu agir ?")
+        loopChoiceAttackFrom(fighterArray: fighterArray)
+        
+        if let choiceAttacker = readLine() { // Check User Choice
+            if var choiceAttackerLoop = Int(choiceAttacker) { // Check if it's Int
+                if choiceAttackerLoop <= 0 || choiceAttackerLoop > geek.nAttackAlive { // If the user Choice is not in the proposition 0 to ... nAttackAline : print :
+                    print("Vous ne pouvez choisir qu'un numéro correspondant au choix proposé : On recommence ^^")
+                    return choiceAttackFrom(whichTeam: whichTeam)
+                }
+                choiceAttackerLoop = geek.arrayGoodIndex[choiceAttackerLoop - 1] // Adjust value to keep the good index (if fighter is dead / fighters are dead)
+                switch choiceAttackerLoop {
+                case choiceAttackerLoop:
+                    historyPrint.UpdateHistoryAttacker(choiceAttackerLoop: choiceAttackerLoop, fighterArray : fighterArray, userTeamName : userTeamName.teamName)
+                    geek.attackerNumber = choiceAttackerLoop // keep  in variable to use for Chest modification value
+                    if historyPrint.hAttackerFCategory == Category.wizard.rawValue {
+                        geek.checkCategory = true
+                    } else {
+                        geek.checkCategory = false
+                    }
+                    return historyPrint.hAttackerFActionStrenght
+                default: print("Je n'ai pas compris qui donne l'attaque. On recommence : ")
+                }
+            }
+            print("Vous devez choisir un chiffre attaquant. On recommence : ")
+            return choiceAttackFrom(whichTeam: whichTeam)
+        }
+        return choiceAttackFrom(whichTeam: whichTeam)
+    }
+    
+    
+    /**
+     loopChoiceAttackFrom : Func to print the attacker list with a loop
+     */
+    static func loopChoiceAttackFrom(fighterArray: [Fighter]) {
+        
+        for nAttack in 0..<fighterArray.count {
+            if fighterArray[nAttack].lifePoint > 0 {  // print only if the fighter is not dead
+                geek.nAttackAlive += 1 // to print the number : increase 1 2 3 ...
+                geek.arrayGoodIndex[geek.nAttackAlive - 1] = nAttack // archive the good index to keep the good one in the fighterArrayP1 or P2
+                print("\(geek.nAttackAlive). \(fighterArray[nAttack].name) le \(fighterArray[nAttack].category) avec \(fighterArray[nAttack].weapon) de puissance \(fighterArray[nAttack].strenght), reste PV : \(fighterArray[nAttack].lifePoint)")
+            }
+        }
+    }
+    
+    
+    /**
+     choiceDefender : Who receive the attack or the Care
+     */
+    static func choiceDefender(whichTeam: Int, damageInLoad: Int) {
+        
+        let userTeam = Tools.selectArrayTeamOneOrTwo(whichTeam: whichTeam) // constant for the defender action : Good Array, Good Fighter, depending of which Team and Category
+        let userTeamInverted = Tools.selectArrayTeamInverted(whichTeam: whichTeam)
+        let defenderArray = Tools.selectArrayDefenderOneorTwo(whichTeam: whichTeam)
+        let defenderArrayInverted = Tools.selectArrayFightersOneorTwo(whichTeam: whichTeam)
+        
+        if !geek.checkCategory { // if it's not a Wizard
+            let healOrAttack = "endommager"
+            let healOrAttack2 = "Attaque"
+            healOrAttackFighter(fighterArray: defenderArray, healOrAttack: healOrAttack, healOrAttack2 : healOrAttack2, userTeam: userTeam)
+        } else { // If it's WIZARD : Then array of the fighter will be different because it's a care for the team of the Wizard
+            let healOrAttack = "soigner"
+            let healOrAttack2 = "Soin"
+            healOrAttackFighter(fighterArray: defenderArrayInverted, healOrAttack: healOrAttack, healOrAttack2: healOrAttack2, userTeam: userTeam)
+        }
+        
+        
+        if let choicetoDefend = readLine() {
+            if var iDefender = Int(choicetoDefend) {
+                if iDefender <= 0 || iDefender > geek.nDefendAlive {
+                    print("Vous ne pouvez choisir qu'un numéro correspondant au choix proposé : On recommence ^^")
+                    let _ = choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
+                }
+                iDefender = geek.arrayGoodIndex[iDefender - 1] // to take again the good Index
+                switch iDefender {
+                    //LOOP FOR CASE SITUATION
+                //APPLY DAMAGE TO THE GOOD FIGHTER
+                case iDefender:
+                    if !geek.checkCategory {  //if it's not Wizard
+                        historyPrint.updateHistoryDefenderDamage(iDefender: iDefender, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: defenderArray, userTeamName: userTeamInverted.teamName)
+                    } else {  //if it's a Wizard
+                        historyPrint.updateHistoryDefenderCare(iDefender: iDefender, damageInLoad: historyPrint.hAttackerFActionStrenght, fighterArray: defenderArrayInverted, userTeamName: userTeam.teamName)
+                    }
+                default: print("Je n'ai pas compris qui reçoit le coup. On recommence : ")
+                }
+                geek.defenderNumber = iDefender // update var defenderNumber
+            } else {
+                print("Vous devez saisir le chiffre d'un défenseur : On recommence ^^")
+                let _ = choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
+            }
+        }
+    }
+    
+    
+    /**
+     healOrAttackFighter : To list with optimized code if it's an attack or a care (depend of FighterArray P1 or P2, and Category : Wizard or no)
+     */
+    static func healOrAttackFighter(fighterArray: [Fighter], healOrAttack: String, healOrAttack2 : String, userTeam: Team) {
+        
+        
+        geek.nDefendAlive = 0 // reset to check good choice while fighters were dead
+        print("\r\(userTeam.symbol) \(userTeam.gamerName) : Quel Fighter désires-tu \(healOrAttack) ?")
+        
+        for nDefend in 0..<fighterArray.count {
+            if fighterArray[nDefend].lifePoint > 0 {
+                geek.nDefendAlive += 1
+                geek.arrayGoodIndex[geek.nDefendAlive - 1] = nDefend
+                print("💢\(geek.nDefendAlive). \(healOrAttack2) sur \(fighterArray[nDefend].name) le \(fighterArray[nDefend].category), reste \(fighterArray[nDefend].lifePoint) PV ")
+            }
+        }
+    }
+
     
     /**
      addWinAndLooseValue : At the end of the Game, give +1 to the value Win or Loose for each Team

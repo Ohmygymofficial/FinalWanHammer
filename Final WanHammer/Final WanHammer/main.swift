@@ -12,4 +12,4 @@ let geek = WanHammerGame()
 let historyPrint = History()
 
 geek.InTheGame()
-History.thanksAtTheEnd()
+historyPrint.thanksAtTheEnd()

@@ -92,16 +92,16 @@
 		B30AF25E2274B70C0021FA0E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B321322C2275EB1600321B77 /* History.swift */,
-				B300144822850A1700B26104 /* WanHammerGame.swift */,
-				B300144A2285130600B26104 /* UserSetting.swift */,
-				B12B8D82228622D300B05367 /* Tools.swift */,
-				B321322A2274BC0A00321B77 /* Team.swift */,
 				B30AF24E2274B63F0021FA0E /* Fighter.swift */,
 				B30AF2502274B6760021FA0E /* Warrior.swift */,
 				B30AF2522274B68B0021FA0E /* Dwarf.swift */,
 				B30AF2542274B69C0021FA0E /* Colossus.swift */,
 				B30AF2562274B6AC0021FA0E /* Wizard.swift */,
+				B321322C2275EB1600321B77 /* History.swift */,
+				B321322A2274BC0A00321B77 /* Team.swift */,
+				B300144822850A1700B26104 /* WanHammerGame.swift */,
+				B300144A2285130600B26104 /* UserSetting.swift */,
+				B12B8D82228622D300B05367 /* Tools.swift */,
 				B30AF2582274B6CB0021FA0E /* Weapon.swift */,
 				B30AF25A2274B6DD0021FA0E /* Special.swift */,
 				B30AF25C2274B6F00021FA0E /* Category.swift */,
