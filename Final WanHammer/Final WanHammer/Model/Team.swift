@@ -317,6 +317,5 @@ class Team { // This class to create UserTeam
         geek.userArray[1].lifeTeam = geek.fighterArrayP2[0].lifePoint + geek.fighterArrayP2[1].lifePoint + geek.fighterArrayP2[2].lifePoint
         
     }
-    
 }
 

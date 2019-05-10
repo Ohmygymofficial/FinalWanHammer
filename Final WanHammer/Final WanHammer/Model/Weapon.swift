@@ -69,5 +69,4 @@ enum Weapon: String {
         historyPrint.hAttackerFActionStrenght = fighterArray[attackerNumber].strenght
         fighterArray[attackerNumber].weapon = resultGift
     }
-    
 }

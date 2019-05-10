@@ -67,6 +67,4 @@ class Tools {
         }
         return defenderArray
     }
-    
-    
 }

@@ -101,5 +101,4 @@ class UserSetting {
         _ = readLine()
         
     }
-    
 }

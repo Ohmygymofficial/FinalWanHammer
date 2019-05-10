@@ -15,5 +15,4 @@ enum Special: String {
     case doubleDamage = "Double Dégâts"
     case fear = "Frayeur"
     case fireball = "FireBall"
-    
 }

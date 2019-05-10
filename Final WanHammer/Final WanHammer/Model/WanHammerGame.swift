@@ -160,8 +160,5 @@ class WanHammerGame {
                 geek.fighterArrayP2.append(fighterInLoad)
             }
         }
-        
     }
-    
-    
 }
