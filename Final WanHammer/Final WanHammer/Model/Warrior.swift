@@ -30,7 +30,7 @@ class Warrior : Fighter {
         wanHammer.choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
         }
         wanHammer.specialFetichAction = false
-        historyPrint.actionPrint(resultBonusToPrint: "")
+        History.actionPrint(resultBonusToPrint: "")
     }
 }
 

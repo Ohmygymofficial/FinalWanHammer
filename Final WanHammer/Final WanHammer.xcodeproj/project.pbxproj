@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B300144922850A1700B26104 /* WanHammerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B300144822850A1700B26104 /* WanHammerGame.swift */; };
-		B300144B2285130600B26104 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B300144A2285130600B26104 /* Message.swift */; };
+		B300144B2285130600B26104 /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B300144A2285130600B26104 /* UserSetting.swift */; };
 		B30AF2482274B2320021FA0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF2472274B2320021FA0E /* main.swift */; };
 		B30AF24F2274B63F0021FA0E /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF24E2274B63F0021FA0E /* Fighter.swift */; };
 		B30AF2512274B6760021FA0E /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AF2502274B6760021FA0E /* Warrior.swift */; };
@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		B300144822850A1700B26104 /* WanHammerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WanHammerGame.swift; sourceTree = "<group>"; };
-		B300144A2285130600B26104 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		B300144A2285130600B26104 /* UserSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
 		B30AF2442274B2320021FA0E /* Final WanHammer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Final WanHammer"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30AF2472274B2320021FA0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B30AF24E2274B63F0021FA0E /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 			children = (
 				B321322C2275EB1600321B77 /* History.swift */,
 				B300144822850A1700B26104 /* WanHammerGame.swift */,
-				B300144A2285130600B26104 /* Message.swift */,
+				B300144A2285130600B26104 /* UserSetting.swift */,
 				B321322A2274BC0A00321B77 /* Team.swift */,
 				B30AF24E2274B63F0021FA0E /* Fighter.swift */,
 				B30AF2502274B6760021FA0E /* Warrior.swift */,
@@ -172,7 +172,7 @@
 				B30AF25D2274B6F00021FA0E /* Category.swift in Sources */,
 				B30AF2532274B68B0021FA0E /* Dwarf.swift in Sources */,
 				B300144922850A1700B26104 /* WanHammerGame.swift in Sources */,
-				B300144B2285130600B26104 /* Message.swift in Sources */,
+				B300144B2285130600B26104 /* UserSetting.swift in Sources */,
 				B30AF2572274B6AC0021FA0E /* Wizard.swift in Sources */,
 				B321322B2274BC0A00321B77 /* Team.swift in Sources */,
 				B30AF24F2274B63F0021FA0E /* Fighter.swift in Sources */,

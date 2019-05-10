@@ -33,7 +33,7 @@ class Colossus : Fighter {
             historyPrint.hAttackerFActionStrenght = wanHammer.choiceAttackFrom(whichTeam: whichTeam)
             wanHammer.choiceDefender(whichTeam: whichTeam, damageInLoad: historyPrint.hAttackerFActionStrenght)
         }
-        historyPrint.actionPrint(resultBonusToPrint: "")
+        History.actionPrint(resultBonusToPrint: "")
         wanHammer.specialFetichAction = false
     }
 }

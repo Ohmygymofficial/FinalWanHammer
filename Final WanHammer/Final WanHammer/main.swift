@@ -10,4 +10,6 @@ import Foundation
 
 let wanHammer = WanHammerGame()
 let historyPrint = History()
+
 wanHammer.InTheGame()
+History.thanksAtTheEnd()
