@@ -4,6 +4,7 @@ Project 3 OPC iOS : Code without graphic : WanHammer
 # WanHammer
 First Game with XCODE Swift - Project 3 - OpenClassRoom's
 
+
 Welcome to the WanHammer Game :
 
 
@@ -34,7 +35,6 @@ Wizard	 	:
 LifePoints 	: 150
 Strengh (care) : 10
 Spécial Attack	: FireBall ! (Damage 10 on each opponent)
-
 
 
 Also : In WanHammer, there is a random BONUS ZONE : 
@@ -84,6 +84,10 @@ Then you can ask for your revenge or end the game
 
 
 
+
+
+
+
 SORRY FOR MY ENGLISH ;). I'm begginer 
 
 COLLABORATE : 
@@ -94,3 +98,4 @@ COLLABORATE :
 - Give me a pull request 
 
 Enjoy ;) 
+
