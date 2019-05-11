@@ -32,9 +32,9 @@ Spécial Attack	: Fear (opponent lost his round)
 
 
 Wizard	 	: 
-LifePoints 	: 150
+LifePoints 	: 125
 Strengh (care) : 10
-Spécial Attack	: FireBall ! (Damage 10 on each opponent)
+Spécial Attack	: FireBall ! (Damage 10 on each opponent, or 15/30 if one of the is dead)
 
 
 Also : In WanHammer, there is a random BONUS ZONE : 
